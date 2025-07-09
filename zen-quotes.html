@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧘 Zen Quote Generator - Daily Wisdom for Lazy Souls 🧘</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 101;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        .back-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .zen-container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .quote-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            position: relative;
+            transition: all 0.5s ease;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            border-radius: 28px;
+            z-index: -1;
+            animation: borderShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes borderShimmer {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        .quote-mark {
+            font-size: 4rem;
+            color: #667eea;
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .quote-text {
+            font-size: 1.8rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: bold;
+            animation: fadeInText 1s ease-out;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .quote-author {
+            font-size: 1.1rem;
+            color: #667eea;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .mood-selector {
+            margin-bottom: 30px;
+        }
+
+        .mood-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .mood-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mood-btn {
+            background: rgba(255, 255, 255, 0.8);
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mood-btn:hover, .mood-btn.selected {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+
+        .share-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .share-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            background: #4ECDC4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            background: #45B7D1;
+            transform: scale(1.05);
+        }
+
+        .share-btn.twitter { background: #1DA1F2; }
+        .share-btn.facebook { background: #4267B2; }
+        .share-btn.copy { background: #FF6B6B; }
+
+        .stats {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #667eea;
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: floatAround 20s linear infinite;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .quote-card.generating {
+            animation: generatePulse 1s ease-in-out;
+        }
+
+        @keyframes generatePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .daily-quote-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #feca57;
+        }
+
+        .daily-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .daily-streak {
+            font-size: 0.9rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .quote-text {
+                font-size: 1.4rem;
+            }
+            
+            .controls {
+                gap: 10px;
+            }
+            
+            .control-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .stats {
+                display: none;
+            }
+            
+            .mood-buttons {
+                gap: 8px;
+            }
+            
+            .mood-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Back to Main</a>
+    
+    <div class="floating-elements" id="floatingElements"></div>
+    
+    <div class="zen-container">
+        <div class="daily-quote-section">
+            <div class="daily-title">🌅 Daily Zen Moment</div>
+            <div class="daily-streak">Day <span id="dailyStreak">1</span> of your mindfulness journey</div>
+        </div>
+        
+        <div class="quote-card" id="quoteCard">
+            <div class="quote-mark">"</div>
+            <div class="quote-text" id="quoteText">Click "New Quote" to discover wisdom for your lazy soul</div>
+            <div class="quote-author" id="quoteAuthor">- The Universe</div>
+        </div>
+        
+        <div class="mood-selector">
+            <div class="mood-title">What vibe do you need right now?</div>
+            <div class="mood-buttons">
+                <button class="mood-btn selected" data-mood="lazy">😴 Lazy</button>
+                <button class="mood-btn" data-mood="peaceful">🕊️ Peaceful</button>
+                <button class="mood-btn" data-mood="motivational">⚡ Gentle Push</button>
+                <button class="mood-btn" data-mood="funny">😄 Funny</button>
+                <button class="mood-btn" data-mood="deep">🤔 Deep</button>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" onclick="generateQuote()">✨ New Quote</button>
+            <button class="control-btn" onclick="favoriteQuote()">💚 Save Favorite</button>
+            <button class="control-btn" onclick="createCustomQuote()">🎨 Make Your Own</button>
+        </div>
+        
+        <div class="share-section">
+            <div class="share-title">📱 Share Your Zen</div>
+            <div class="share-buttons">
+                <button class="share-btn twitter" onclick="shareTwitter()">Twitter</button>
+                <button class="share-btn facebook" onclick="shareFacebook()">Facebook</button>
+                <button class="share-btn copy" onclick="copyQuote()">Copy Text</button>
+                <button class="share-btn" onclick="downloadImage()">Save Image</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stats">
+        📊 Quotes Generated: <span id="quotesGenerated">0</span><br>
+        💚 Favorites Saved: <span id="favoritesSaved">0</span><br>
+        🔄 Shares Made: <span id="sharesMade">0</span>
+    </div>
+
+    <script>
+        let currentQuote = null;
+        let selectedMood = 'lazy';
+        let stats = {
+            quotesGenerated: 0,
+            favoritesSaved: 0,
+            sharesMade: 0,
+            dailyStreak: 1
+        };
+
+        const quotes = {
+            lazy: [
+                {
+                    text: "The art of doing nothing is actually doing everything your soul needs.",
+                    author: "The Lazy Philosopher"
+                },
+                {
+                    text: "Sometimes the most productive thing you can do is absolutely nothing.",
+                    author: "Master of Chill"
+                },
+                {
+                    text: "Rest is not a reward for work completed, it's a requirement for work to be meaningful.",
+                    author: "The Wise Sloth"
+                },
+                {
+                    text: "In a world obsessed with hustle, choosing rest is a radical act of self-love.",
+                    author: "The Anti-Hustle Guru"
+                },
+                {
+                    text: "Your worth is not measured by your productivity. You are valuable simply because you exist.",
+                    author: "The Gentle Reminder"
+                }
+            ],
+            peaceful: [
+                {
+                    text: "Peace is not the absence of chaos, but finding stillness within yourself while storms rage around you.",
+                    author: "The Calm Observer"
+                },
+                {
+                    text: "Like a lake reflecting the sky, a peaceful mind reflects the beauty of the present moment.",
+                    author: "Still Waters"
+                },
+                {
+                    text: "Inner peace begins the moment you choose not to allow another person or event to control your emotions.",
+                    author: "The Centered Soul"
+                },
+                {
+                    text: "Serenity is not freedom from the storm, but peace amid the storm.",
+                    author: "The Peaceful Warrior"
+                }
+            ],
+            motivational: [
+                {
+                    text: "You don't have to be great to get started, but you have to get started to be great... eventually.",
+                    author: "The Gentle Motivator"
+                },
+                {
+                    text: "Small steps in the right direction can turn out to be the biggest step of your life.",
+                    author: "The Patient Progress Guide"
+                },
+                {
+                    text: "Your dreams don't have expiration dates. Start whenever you're ready.",
+                    author: "The Timeless Encourager"
+                },
+                {
+                    text: "Progress, not perfection. Movement, not speed. Forward, not fast.",
+                    author: "The Steady Stepper"
+                }
+            ],
+            funny: [
+                {
+                    text: "I told my problems to go away, but they said they were having too much fun.",
+                    author: "The Honest Human"
+                },
+                {
+                    text: "My spirit animal is a sloth on vacation.",
+                    author: "The Self-Aware Lazy Person"
+                },
+                {
+                    text: "I'm not lazy, I'm in energy-saving mode.",
+                    author: "The Eco-Friendly Human"
+                },
+                {
+                    text: "My superpower is making 'just five more minutes' last for three hours.",
+                    author: "Captain Procrastination"
+                },
+                {
+                    text: "I practice selective participation in the hustle culture.",
+                    author: "The Selective Hustler"
+                }
+            ],
+            deep: [
+                {
+                    text: "We are not human beings having a spiritual experience. We are spiritual beings having a very confusing human experience.",
+                    author: "The Confused Mystic"
+                },
+                {
+                    text: "The universe doesn't hurry, yet everything is accomplished in perfect timing.",
+                    author: "Cosmic Patience"
+                },
+                {
+                    text: "What if the meaning of life isn't something you discover, but something you create through how you choose to live?",
+                    author: "The Meaning Maker"
+                },
+                {
+                    text: "You are both the artist and the artwork, the question and the answer, the seeker and the sought.",
+                    author: "The Paradox Embracer"
+                }
+            ]
+        };
+
+        const floatingSymbols = ['🌸', '🍃', '☁️', '✨', '🌙', '🦋', '🌿', '💫', '🕊️', '🌺'];
+
+        function setupMoodSelector() {
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedMood = this.dataset.mood;
+                });
+            });
+        }
+
+        function generateQuote() {
+            const quoteCard = document.getElementById('quoteCard');
+            quoteCard.classList.add('generating');
+            
+            setTimeout(() => {
+                const moodQuotes = quotes[selectedMood];
+                const randomQuote = moodQuotes[Math.floor(Math.random() * moodQuotes.length)];
+                
+                currentQuote = randomQuote;
+                
+                document.getElementById('quoteText').textContent = randomQuote.text;
+                document.getElementById('quoteAuthor').textContent = `- ${randomQuote.author}`;
+                
+                stats.quotesGenerated++;
+                updateStats();
+                
+                quoteCard.classList.remove('generating');
+                
+                // Create floating elements
+                createFloatingElement();
+            }, 500);
+        }
+
+        function favoriteQuote() {
+            if (!currentQuote) {
+                showNotification("Generate a quote first! ✨");
+                return;
+            }
+            
+            // Save to localStorage
+            let favorites = JSON.parse(localStorage.getItem('zenFavorites') || '[]');
+            favorites.push(currentQuote);
+            localStorage.setItem('zenFavorites', JSON.stringify(favorites));
+            
+            stats.favoritesSaved++;
+            updateStats();
+            
+            showNotification("Quote saved to your favorites! 💚");
+        }
+
+        function createCustomQuote() {
+            const customText = prompt("Share your own piece of wisdom:");
+            const customAuthor = prompt("Who should we credit this wisdom to?") || "You";
+            
+            if (customText) {
+                currentQuote = {
+                    text: customText,
+                    author: customAuthor
+                };
+                
+                document.getElementById('quoteText').textContent = customText;
+                document.getElementById('quoteAuthor').textContent = `- ${customAuthor}`;
+                
+                showNotification("Your wisdom has been shared! 🎨");
+            }
+        }
+
+        function shareTwitter() {
+            if (!currentQuote) {
+                showNotification("Generate a quote first! ✨");
+                return;
+            }
+            
+            const text = `"${currentQuote.text}" - ${currentQuote.author}\n\n#ZenQuotes #Mindfulness #ChillVibes`;
+            const url = window.location.href;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            
+            stats.sharesMade++;
+            updateStats();
+        }
+
+        function shareFacebook() {
+            if (!currentQuote) {
+                showNotification("Generate a quote first! ✨");
+                return;
+            }
+            
+            const url = window.location.href;
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+            
+            stats.sharesMade++;
+            updateStats();
+        }
+
+        function copyQuote() {
+            if (!currentQuote) {
+                showNotification("Generate a quote first! ✨");
+                return;
+            }
+            
+            const text = `"${currentQuote.text}" - ${currentQuote.author}`;
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification("Quote copied to clipboard! 📋");
+                stats.sharesMade++;
+                updateStats();
+            });
+        }
+
+        function downloadImage() {
+            if (!currentQuote) {
+                showNotification("Generate a quote first! ✨");
+                return;
+            }
+            
+            // Create canvas for quote image
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 800;
+            canvas.height = 600;
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Quote text
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 36px Arial';
+            ctx.textAlign = 'center';
+            
+            // Word wrap for quote text
+            const words = currentQuote.text.split(' ');
+            let line = '';
+            let y = canvas.height / 2 - 60;
+            
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > canvas.width - 100 && n > 0) {
+                    ctx.fillText(line, canvas.width / 2, y);
+                    line = words[n] + ' ';
+                    y += 50;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, canvas.width / 2, y);
+            
+            // Author
+            ctx.font = 'italic 24px Arial';
+            ctx.fillText(`- ${currentQuote.author}`, canvas.width / 2, y + 80);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = 'zen-quote.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            
+            showNotification("Quote image saved! 📸");
+        }
+
+        function createFloatingElement() {
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.textContent = floatingSymbols[Math.floor(Math.random() * floatingSymbols.length)];
+            element.style.left = Math.random() * 100 + '%';
+            element.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('floatingElements').appendChild(element);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 20000);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(255, 255, 255, 0.95);
+                padding: 20px 30px;
+                border-radius: 15px;
+                border: 2px solid #667eea;
+                font-weight: bold;
+                color: #333;
+                z-index: 1000;
+                animation: notificationPop 2s ease-out forwards;
+                text-align: center;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        function updateStats() {
+            document.getElementById('quotesGenerated').textContent = stats.quotesGenerated;
+            document.getElementById('favoritesSaved').textContent = stats.favoritesSaved;
+            document.getElementById('sharesMade').textContent = stats.sharesMade;
+            document.getElementById('dailyStreak').textContent = stats.dailyStreak;
+            
+            // Save stats to localStorage
+            localStorage.setItem('zenStats', JSON.stringify(stats));
+        }
+
+        function loadStats() {
+            const savedStats = localStorage.getItem('zenStats');
+            if (savedStats) {
+                stats = { ...stats, ...JSON.parse(savedStats) };
+                updateStats();
+            }
+        }
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes notificationPop {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                20% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+                80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        setupMoodSelector();
+        loadStats();
+        
+        // Create initial floating elements
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFloatingElement, i * 1000);
+        }
+        
+        // Generate initial quote
+        setTimeout(() => {
+            generateQuote();
+        }, 1000);
+        
+        // Create floating elements periodically
+        setInterval(createFloatingElement, 5000);
+    </script>
+</body>
+</html>

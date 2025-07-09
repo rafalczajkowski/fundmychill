@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍵 Tea Guide & Reviews | Rafał's Chill Collection</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #7fcdcd 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #4ecdc4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            background: linear-gradient(45deg, #96ceb4, #4ecdc4);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(45deg, #4ecdc4, #96ceb4);
+            transform: translateY(-1px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #4ecdc4;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #2d5a27;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #3d7c47;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            background: #f0fff0;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #4ecdc4;
+            margin: 20px 0;
+            text-align: center;
+            color: #3d7c47;
+        }
+
+        .tea-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #96ceb4;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .herbal-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #dda0dd;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2d5a27;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .herbal-title {
+            font-size: 1.8rem;
+            color: #8b4b8b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tea-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tea-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .herbal-card {
+            background: #faf8ff;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #dda0dd;
+        }
+
+        .tea-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2d5a27;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .herbal-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #8b4b8b;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tea-emoji {
+            font-size: 1.5rem;
+        }
+
+        .tea-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #2d5a27;
+        }
+
+        .herbal-stat-value {
+            font-weight: bold;
+            color: #8b4b8b;
+        }
+
+        .tea-description {
+            color: #3d7c47;
+            margin: 15px 0;
+        }
+
+        .herbal-description {
+            color: #8b4b8b;
+            margin: 15px 0;
+        }
+
+        .rafal-rating {
+            background: #fff3cd;
+            border: 1px solid #ffd700;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .rating-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .stars {
+            font-size: 1.2rem;
+            margin: 5px 0;
+        }
+
+        .brewing-tips {
+            background: #e8f5e8;
+            border: 2px solid #4ecdc4;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .tip-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #96ceb4;
+        }
+
+        .tip-title {
+            font-weight: bold;
+            color: #2d5a27;
+            margin-bottom: 8px;
+        }
+
+        .favorites-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.9));
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+            margin-bottom: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .herbal-explainer {
+            background: #f8f0ff;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #dda0dd;
+            margin: 20px 0;
+            text-align: center;
+            color: #8b4b8b;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .tea-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-link {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="about.html" class="nav-link">🐸 About</a>
+                <a href="blog.html" class="nav-link">📖 Journal</a>
+                <a href="tea.html" class="nav-link">🍵 Tea Guide</a>
+                <a href="coffee.html" class="nav-link">☕ Coffee Guide</a>
+                <a href="supporters.html" class="nav-link">💚 Supporters</a>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="title">🍵 Tea Guide & Reviews</h1>
+            <p class="subtitle">Rafał's personal collection of tea wisdom and honest reviews</p>
+            <div class="intro">
+                <p>Welcome to my tea corner! As someone who drinks way too much tea while avoiding real work, 
+                I've developed some opinions about different varieties. Here's what I've learned on my journey to the perfect cup.</p>
+            </div>
+        </div>
+
+        <!-- Rafał's Favorites -->
+        <div class="favorites-section">
+            <h2 class="section-title">⭐ Rafał's Current Favorites</h2>
+            <div class="tea-grid">
+                <div class="tea-card">
+                    <div class="tea-name">
+                        <span class="tea-emoji">🫖</span>
+                        English Breakfast
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Strength</div>
+                            <div class="stat-value">Strong</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Best Time</div>
+                            <div class="stat-value">Morning</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Milk?</div>
+                            <div class="stat-value">Yes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="stat-value">3-5 min</div>
+                        </div>
+                    </div>
+                    <div class="tea-description">
+                        My go-to morning tea. Bold, reliable, and perfect with a splash of milk. It's like a warm hug that also wakes you up. 
+                        The kind of tea that makes you feel like you could conquer the day (even if you're planning to avoid conquering anything).
+                    </div>
+                    <div class="rafal-rating">
+                        <div class="rating-title">Rafał's Rating:</div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <div>"Perfect for contemplating why I don't want a traditional career while sitting by the window."</div>
+                    </div>
+                </div>
+
+                <div class="tea-card">
+                    <div class="tea-name">
+                        <span class="tea-emoji">🌸</span>
+                        Earl Grey
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Strength</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Best Time</div>
+                            <div class="stat-value">Afternoon</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Milk?</div>
+                            <div class="stat-value">Optional</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="stat-value">3-4 min</div>
+                        </div>
+                    </div>
+                    <div class="tea-description">
+                        The sophisticated choice. That bergamot oil gives it a fancy, floral vibe that makes you feel cultured. 
+                        Perfect for afternoon breaks when you want to pretend you're a character in a period drama instead of someone avoiding emails.
+                    </div>
+                    <div class="rafal-rating">
+                        <div class="rating-title">Rafał's Rating:</div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <div>"Makes me feel like I have my life together, even when I definitely don't."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real Tea Types Guide -->
+        <div class="tea-section">
+            <h2 class="section-title">🌿 Real Teas (From the Camellia Sinensis Plant)</h2>
+            <div class="tea-grid">
+                <div class="tea-card">
+                    <div class="tea-name">
+                        <span class="tea-emoji">🍃</span>
+                        Sencha
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="stat-value">70-80°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="stat-value">1-2 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Origin</div>
+                            <div class="stat-value">Japan</div>
+                        </div>
+                    </div>
+                    <div class="tea-description">
+                        The classic Japanese green tea. Fresh, grassy, and surprisingly delicate. Don't oversteep or you'll get bitter regret instead of zen vibes. Perfect for pretending you're in a Japanese tea ceremony.
+                    </div>
+                </div>
+
+                <div class="tea-card">
+                    <div class="tea-name">
+                        <span class="tea-emoji">🌾</span>
+                        Genmaicha
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">Low</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="stat-value">80-85°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="stat-value">2-3 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Origin</div>
+                            <div class="stat-value">Japan</div>
+                        </div>
+                    </div>
+                    <div class="tea-description">
+                        Green tea mixed with roasted rice! Sounds weird, tastes amazing. Nutty, toasty, and comforting. Known as "popcorn tea" because some rice kernels pop. It's like drinking a cozy hug.
+                    </div>
+                    <div class="rafal-rating">
+                        <div class="rating-title">Rafał's Rating:</div>
+                        <div class="stars">⭐⭐⭐⭐</div>
+                        <div>"My go-to when I want green tea but also want to feel like I'm snacking on something toasty."</div>
+                    </div>
+                </div>
+
+                <div class="tea-card">
+                    <div class="tea-name">
+                        <span class="tea-emoji">🌱</span>
+                        Kukicha
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">Very Low</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="stat-value">85-90°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="stat-value">3-4 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Origin</div>
+                            <div class="stat-value">Japan</div>
+                        </div>
+                    </div>
+                    <div class="tea-description">
+                        Made from tea plant stems and twigs! Yes, really. Smooth, mild, and naturally sweet. Great for evening because it's low in caffeine. It's like drinking the essence of a zen garden.
+                    </div>
+                </div>
+
+                <div class="tea-card">
+                    <div class="tea-name">
+                        <span class="tea-emoji">🧘</span>
+                        Da Hong Pao
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="stat-value">95-100°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="stat-value">3-5 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Origin</div>
+                            <div class="stat-value">China</div>
+                        </div>
+                    </div>
+                    <div class="tea-description">
+                        "Big Red Robe" oolong tea. Complex, roasted flavor that changes with each sip. One of those teas that makes you feel like a sophisticated tea master, even if you're just winging it.
+                    </div>
+                </div>
+
+                <div class="tea-card">
+                    <div class="tea-name">
+                        <span class="tea-emoji">🌙</span>
+                        Tie Guan Yin
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="stat-value">90-95°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="stat-value">2-4 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Origin</div>
+                            <div class="stat-value">China</div>
+                        </div>
+                    </div>
+                    <div class="tea-description">
+                        "Iron Goddess of Mercy" - what a name! This oolong is floral, smooth, and has this amazing lingering sweetness. Perfect for when you want to feel mystical and enlightened.
+                    </div>
+                </div>
+
+                <div class="tea-card">
+                    <div class="tea-name">
+                        <span class="tea-emoji">🫖</span>
+                        Lapsang Souchong
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="stat-value">95-100°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="stat-value">3-5 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Origin</div>
+                            <div class="stat-value">China</div>
+                        </div>
+                    </div>
+                    <div class="tea-description">
+                        The campfire tea! Smoked over pine fires, so it tastes like you're drinking liquid barbecue. Divisive but unforgettable. Either you love it or you think someone set your tea on fire.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Herbal "Teas" Section -->
+        <div class="herbal-section">
+            <h2 class="herbal-title">🌺 Herbal Infusions (Not Actually Tea!)</h2>
+            <div class="herbal-explainer">
+                <p>Plot twist: These aren't real teas! They're herbal infusions made from flowers, herbs, and spices. 
+                No Camellia sinensis plant involved, but they're still delicious and have their own superpowers.</p>
+            </div>
+            <div class="tea-grid">
+                <div class="herbal-card">
+                    <div class="herbal-name">
+                        <span class="tea-emoji">🌺</span>
+                        Chamomile
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="herbal-stat-value">None</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="herbal-stat-value">100°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="herbal-stat-value">5-7 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Superpower</div>
+                            <div class="herbal-stat-value">Sleepy</div>
+                        </div>
+                    </div>
+                    <div class="herbal-description">
+                        The ultimate chill "tea." Caffeine-free and naturally calming. Tastes like flowers in the best possible way. 
+                        Perfect for evening wind-down or when you need to pretend to be productive while actually just relaxing.
+                    </div>
+                </div>
+
+                <div class="herbal-card">
+                    <div class="herbal-name">
+                        <span class="tea-emoji">🌿</span>
+                        Peppermint
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="herbal-stat-value">None</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="herbal-stat-value">100°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="herbal-stat-value">5-7 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Superpower</div>
+                            <div class="herbal-stat-value">Fresh</div>
+                        </div>
+                    </div>
+                    <div class="herbal-description">
+                        Refreshing and cooling. Good for digestion and when you want something that tastes clean and minty. 
+                        Like drinking a breath mint but in a good way.
+                    </div>
+                </div>
+
+                <div class="herbal-card">
+                    <div class="herbal-name">
+                        <span class="tea-emoji">🌹</span>
+                        Hibiscus
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="herbal-stat-value">None</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="herbal-stat-value">100°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="herbal-stat-value">5-10 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Superpower</div>
+                            <div class="herbal-stat-value">Tart</div>
+                        </div>
+                    </div>
+                    <div class="herbal-description">
+                        Bright red, tart, and cranberry-like. High in vitamin C and antioxidants. Great hot or iced. 
+                        It's like drinking liquid rubies that happen to be good for you.
+                    </div>
+                </div>
+
+                <div class="herbal-card">
+                    <div class="herbal-name">
+                        <span class="tea-emoji">🫚</span>
+                        Ginger Root
+                    </div>
+                    <div class="tea-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="herbal-stat-value">None</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Water Temp</div>
+                            <div class="herbal-stat-value">100°C</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steep Time</div>
+                            <div class="herbal-stat-value">5-10 min</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Superpower</div>
+                            <div class="herbal-stat-value">Spicy</div>
+                        </div>
+                    </div>
+                    <div class="herbal-description">
+                        Warming, spicy, and great for digestion. Perfect when you're feeling under the weather or need something with kick. 
+                        It's like a gentle slap that wakes up your whole system.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brewing Tips -->
+        <div class="brewing-tips">
+            <h2 style="color: #2d5a27; text-align: center; margin-bottom: 20px;">🫖 Rafał's Brewing Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <div class="tip-title">Water Temperature Matters</div>
+                    <div>Green teas get bitter with boiling water. Black teas love it hot. Herbals can handle the heat. When in doubt, let boiling water cool for a minute.</div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-title">Don't Rush the Steep</div>
+                    <div>Good tea takes time. Use it as an excuse to stare out the window and contemplate the meaning of life.</div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-title">Quality Over Quantity</div>
+                    <div>Cheap tea bags are fine, but loose leaf tea is a game changer. It's like the difference between instant and real coffee.</div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-title">The Perfect Cup</div>
+                    <div>There's no perfect cup. It's whatever makes you happy in that moment. Sometimes that's fancy loose leaf, sometimes it's a grocery store tea bag.</div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-title">Japanese Teas Are Delicate</div>
+                    <div>Sencha, genmaicha, kukicha - they all need cooler water and shorter steeps. Think gentle, not aggressive.</div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-title">Oolongs Are Forgiving</div>
+                    <div>Most oolongs can handle multiple steepings. Each round reveals different flavors - it's like having several teas in one!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Happy brewing! Remember, the best tea is the one you actually drink. 🍵</p>
+            <p style="margin-top: 10px;">Got tea recommendations or questions? Drop me a line: rafal@fundmychill.com</p>
+        </div>
+    </div>
+</body>
+</html>

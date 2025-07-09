@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌱 Garden Meditation - Chill with Plants 🌱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 40%, #90EE90 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="%234ecdc4"/><text x="10" y="14" text-anchor="middle" font-size="12">💧</text></svg>'), auto;
+        }
+
+        .game-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            text-align: center;
+            z-index: 100;
+            border-bottom: 3px solid #4ecdc4;
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            color: #2d5a27;
+            margin-bottom: 10px;
+        }
+
+        .game-instructions {
+            color: #3d7c47;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background: #4ecdc4;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .garden-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            padding-top: 120px;
+            overflow: hidden;
+        }
+
+        .garden-ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, #8FBC8F 0%, #6B8E23 100%);
+            border-top: 5px solid #654321;
+        }
+
+        /* Plant Containers */
+        .plant-spot {
+            position: absolute;
+            width: 80px;
+            height: 120px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .plant-spot:hover {
+            transform: scale(1.05);
+        }
+
+        .plant-spot.watered {
+            animation: sparkle 1s ease-out;
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); filter: brightness(1.3); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+
+        /* Plant Stages */
+        .plant {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.8s ease;
+            transform-origin: bottom center;
+        }
+
+        /* Seed Stage */
+        .plant.stage-0 {
+            width: 8px;
+            height: 8px;
+            background: #8B4513;
+            border-radius: 50%;
+            bottom: -4px;
+        }
+
+        /* Sprout Stage */
+        .plant.stage-1 {
+            width: 4px;
+            height: 15px;
+            background: #32CD32;
+            border-radius: 2px;
+            bottom: 0;
+        }
+
+        .plant.stage-1::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -2px;
+            width: 8px;
+            height: 8px;
+            background: #90EE90;
+            border-radius: 50%;
+        }
+
+        /* Small Plant Stage */
+        .plant.stage-2 {
+            width: 6px;
+            height: 25px;
+            background: #228B22;
+            border-radius: 3px;
+            bottom: 0;
+        }
+
+        .plant.stage-2::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -4px;
+            width: 14px;
+            height: 12px;
+            background: #32CD32;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .plant.stage-2::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            right: -4px;
+            width: 10px;
+            height: 8px;
+            background: #90EE90;
+            border-radius: 50%;
+        }
+
+        /* Medium Plant Stage */
+        .plant.stage-3 {
+            width: 8px;
+            height: 35px;
+            background: #006400;
+            border-radius: 4px;
+            bottom: 0;
+        }
+
+        .plant.stage-3::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: 24px;
+            height: 20px;
+            background: #228B22;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .plant.stage-3::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: -6px;
+            width: 16px;
+            height: 14px;
+            background: #32CD32;
+            border-radius: 50%;
+        }
+
+        /* Full Grown Plant */
+        .plant.stage-4 {
+            width: 10px;
+            height: 45px;
+            background: #004225;
+            border-radius: 5px;
+            bottom: 0;
+        }
+
+        .plant.stage-4::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 34px;
+            height: 28px;
+            background: #228B22;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .plant.stage-4::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            width: 20px;
+            height: 18px;
+            background: #32CD32;
+            border-radius: 50%;
+        }
+
+        /* Flower Stage */
+        .plant.stage-5 {
+            width: 12px;
+            height: 55px;
+            background: #004225;
+            border-radius: 6px;
+            bottom: 0;
+        }
+
+        .plant.stage-5::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 42px;
+            height: 35px;
+            background: #228B22;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .plant.stage-5::after {
+            content: '🌸';
+            position: absolute;
+            top: -25px;
+            left: -8px;
+            font-size: 16px;
+            animation: gentle-sway 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Water Droplets */
+        .water-drop {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: #4FC3F7;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(45deg);
+            animation: water-fall 1s ease-out;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        @keyframes water-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-20px) rotate(45deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(20px) rotate(45deg) scale(0.5);
+            }
+        }
+
+        /* Floating UI */
+        .zen-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 20px;
+            border: 3px solid #4ecdc4;
+            font-size: 1.2rem;
+            color: #2d5a27;
+            text-align: center;
+            z-index: 200;
+            animation: zen-fade 3s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes zen-fade {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #4ecdc4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 101;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #ff6b6b;
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            animation: cloud-drift 20s linear infinite;
+            z-index: 5;
+        }
+
+        .cloud::before {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+        }
+
+        .cloud1 {
+            width: 80px;
+            height: 30px;
+            top: 20%;
+            left: -80px;
+        }
+
+        .cloud1::before {
+            width: 50px;
+            height: 40px;
+            top: -15px;
+            left: 10px;
+        }
+
+        .cloud2 {
+            width: 60px;
+            height: 25px;
+            top: 35%;
+            left: -60px;
+            animation-delay: -10s;
+        }
+
+        .cloud2::before {
+            width: 40px;
+            height: 30px;
+            top: -10px;
+            left: 15px;
+        }
+
+        @keyframes cloud-drift {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(100vw + 100px)); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-stats {
+                gap: 15px;
+            }
+            
+            .stat {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .plant-spot {
+                width: 60px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Back to Main</a>
+    
+    <div class="game-header">
+        <h1 class="game-title">🌱 Garden Meditation 🌱</h1>
+        <p class="game-instructions">Click around to water plants and watch them grow. Pure zen vibes only.</p>
+        <div class="game-stats">
+            <div class="stat">Plants Watered: <span id="wateredCount">0</span></div>
+            <div class="stat">Flowers Bloomed: <span id="flowerCount">0</span></div>
+            <div class="stat">Zen Level: <span id="zenLevel">Peaceful</span></div>
+        </div>
+    </div>
+
+    <div class="garden-container" id="garden">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="garden-ground"></div>
+    </div>
+
+    <script>
+        let wateredCount = 0;
+        let flowerCount = 0;
+        let plantsData = [];
+        let zenMessages = [
+            "🌱 A seed of peace has been planted",
+            "🌿 Nature grows in its own time",
+            "🌸 Beauty blooms when we're patient",
+            "☀️ Every plant brings more serenity",
+            "🦋 Your garden of calm is flourishing",
+            "🌺 Zen is found in simple acts",
+            "🍃 Breathe in the peace you've created",
+            "🌻 Mindfulness grows with each click"
+        ];
+
+        function createPlantSpots() {
+            const garden = document.getElementById('garden');
+            const spotCount = window.innerWidth < 768 ? 20 : 30;
+            
+            for (let i = 0; i < spotCount; i++) {
+                const spot = document.createElement('div');
+                spot.className = 'plant-spot';
+                spot.style.left = Math.random() * (window.innerWidth - 80) + 'px';
+                spot.style.bottom = Math.random() * 150 + 50 + 'px';
+                
+                const plant = document.createElement('div');
+                plant.className = 'plant stage-0';
+                spot.appendChild(plant);
+                
+                plantsData[i] = { stage: 0, lastWatered: 0 };
+                
+                spot.addEventListener('click', (e) => waterPlant(i, e));
+                garden.appendChild(spot);
+            }
+        }
+
+        function waterPlant(index, event) {
+            const spot = event.currentTarget;
+            const plant = spot.querySelector('.plant');
+            const currentTime = Date.now();
+            
+            // Create water droplet effect
+            createWaterDroplet(event.clientX, event.clientY);
+            
+            // Add watered animation
+            spot.classList.add('watered');
+            setTimeout(() => spot.classList.remove('watered'), 1000);
+            
+            // Grow plant if enough time has passed (no wait time - pure zen)
+            if (plantsData[index].stage < 5) {
+                plantsData[index].stage++;
+                plantsData[index].lastWatered = currentTime;
+                
+                plant.className = `plant stage-${plantsData[index].stage}`;
+                
+                wateredCount++;
+                updateStats();
+                
+                // Check if it became a flower
+                if (plantsData[index].stage === 5) {
+                    flowerCount++;
+                    showZenMessage();
+                    updateStats();
+                }
+                
+                // Random zen message for growth
+                if (Math.random() < 0.3) {
+                    setTimeout(showZenMessage, 500);
+                }
+            } else {
+                // Fully grown plant - just zen vibes
+                if (Math.random() < 0.5) {
+                    showZenMessage();
+                }
+            }
+        }
+
+        function createWaterDroplet(x, y) {
+            const drop = document.createElement('div');
+            drop.className = 'water-drop';
+            drop.style.left = x + 'px';
+            drop.style.top = y + 'px';
+            
+            document.body.appendChild(drop);
+            
+            setTimeout(() => drop.remove(), 1000);
+        }
+
+        function showZenMessage() {
+            const message = document.createElement('div');
+            message.className = 'zen-message';
+            message.textContent = zenMessages[Math.floor(Math.random() * zenMessages.length)];
+            
+            document.body.appendChild(message);
+            
+            setTimeout(() => message.remove(), 3000);
+        }
+
+        function updateStats() {
+            document.getElementById('wateredCount').textContent = wateredCount;
+            document.getElementById('flowerCount').textContent = flowerCount;
+            
+            // Update zen level based on progress
+            let zenLevel = "Peaceful";
+            if (flowerCount >= 20) zenLevel = "Enlightened Master";
+            else if (flowerCount >= 15) zenLevel = "Zen Garden Keeper";
+            else if (flowerCount >= 10) zenLevel = "Tranquil Gardener";
+            else if (flowerCount >= 5) zenLevel = "Mindful Tender";
+            else if (wateredCount >= 20) zenLevel = "Growing Serenity";
+            else if (wateredCount >= 10) zenLevel = "Finding Balance";
+            
+            document.getElementById('zenLevel').textContent = zenLevel;
+        }
+
+        // Global click handler for ambient water effects
+        document.addEventListener('click', (e) => {
+            // Don't interfere with plant clicking
+            if (e.target.closest('.plant-spot') || e.target.closest('.back-btn')) return;
+            
+            // Create ambient water droplets
+            if (Math.random() < 0.3) {
+                createWaterDroplet(
+                    e.clientX + Math.random() * 40 - 20,
+                    e.clientY + Math.random() * 40 - 20
+                );
+            }
+        });
+
+        // Auto-grow some plants slowly for ambient life
+        function ambientGrowth() {
+            setInterval(() => {
+                const randomPlant = Math.floor(Math.random() * plantsData.length);
+                if (plantsData[randomPlant].stage < 2 && Math.random() < 0.1) {
+                    const spots = document.querySelectorAll('.plant-spot');
+                    const plant = spots[randomPlant].querySelector('.plant');
+                    
+                    plantsData[randomPlant].stage++;
+                    plant.className = `plant stage-${plantsData[randomPlant].stage}`;
+                    
+                    if (Math.random() < 0.2) {
+                        showZenMessage();
+                    }
+                }
+            }, 5000);
+        }
+
+        // Initialize garden
+        createPlantSpots();
+        ambientGrowth();
+        
+        // Welcome message
+        setTimeout(() => {
+            showZenMessage();
+        }, 1000);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Could recreate spots on significant resize
+            if (window.innerWidth < 768 && document.querySelectorAll('.plant-spot').length > 25) {
+                // Optionally reduce spots on mobile
+            }
+        });
+    </script>
+</body>
+</html>

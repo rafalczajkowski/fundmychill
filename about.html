@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Sam the Frog 🐸 | The Chill Life Experiment</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #7fcdcd 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #4ecdc4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            background: linear-gradient(45deg, #96ceb4, #4ecdc4);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(45deg, #4ecdc4, #96ceb4);
+            transform: translateY(-1px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #4ecdc4;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #2d5a27;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #3d7c47;
+            margin-bottom: 20px;
+        }
+
+        .profile-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #96ceb4;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-image {
+            text-align: center;
+        }
+
+        .avatar {
+            width: 200px;
+            height: 200px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            border: 4px solid #2d5a27;
+            margin: 0 auto 20px;
+            animation: gentle-bob 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-bob {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .quick-facts {
+            background: #f0fff0;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #4ecdc4;
+        }
+
+        .fact-item {
+            margin-bottom: 10px;
+            color: #3d7c47;
+        }
+
+        .fact-label {
+            font-weight: bold;
+            color: #2d5a27;
+        }
+
+        .bio-content {
+            color: #3d7c47;
+            font-size: 1.1rem;
+        }
+
+        .bio-content h3 {
+            color: #2d5a27;
+            margin: 25px 0 15px 0;
+            font-size: 1.3rem;
+        }
+
+        .bio-content p {
+            margin-bottom: 15px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #96ceb4;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2d5a27;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .value-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #4ecdc4;
+            text-align: center;
+        }
+
+        .value-emoji {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .value-title {
+            font-weight: bold;
+            color: #2d5a27;
+            margin-bottom: 8px;
+        }
+
+        .value-desc {
+            color: #3d7c47;
+            font-size: 0.9rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #4ecdc4;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            background: #f0fff0;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: #2d5a27;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            color: #3d7c47;
+        }
+
+        .faq-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #2d5a27;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            color: #3d7c47;
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .avatar {
+                width: 150px;
+                height: 150px;
+                font-size: 4rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-link {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="about.html" class="nav-link">🐸 About</a>
+                <a href="blog.html" class="nav-link">📖 Chill Journal</a>
+                <a href="supporters.html" class="nav-link">💚 Supporters</a>
+                <a href="garden.html" class="nav-link">🌱 Games</a>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="title">Meet Rafał the Frog 🐸</h1>
+            <p class="subtitle">The person behind the chill life experiment</p>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-image">
+                <div class="avatar">
+                    <img src="frog-avatar.jpg" alt="Rafał the Frog" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div class="quick-facts">
+                    <h3 style="color: #2d5a27; margin-bottom: 15px; text-align: center;">Quick Facts</h3>
+                    <div class="fact-item">
+                        <span class="fact-label">Age:</span> 28
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Location:</span> Somewhere with decent tea shops
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Current Job:</span> Social Media
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Dream Job:</span> Professional garden-starer
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Favorite Tea:</span> English Breakfast & Earl Grey
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Languages:</span> Polish (native), English (fluent), Spanish (basic), Japanese (very chotto sukoshi 😅 but trying to improve!)
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Life Philosophy:</span> Be like a frog on a lily pad
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bio-content">
+                <p>Hi there! I'm Rafał, and yes, I really am trying to crowdfund my way out of traditional employment. But let me tell you a bit more about who I am beyond just "that person asking for money on the internet."</p>
+                
+                <h3>The Real Story</h3>
+                <p>I graduated university with a degree I thought I wanted, worked a few jobs, got a postgrad degree, and earned a few certifications. But I never really felt truly interested in these roles. It's like wearing shoes a size too small - technically doable, but deeply uncomfortable.</p>
+                
+                <p>I'm not lazy (well, maybe a little), but I am someone who values intentional living over constant modern productivity. I'd rather spend my days perfecting tea brewing techniques, reading books that have nothing to do with my "career development," listening to music, and maybe learning to paint watercolor frogs. I know we all need to contribute to society, but I'm just really not passionate about typical careers and I don't have any huge goals or ambitions. I just want a simple, cozy life. So you won't catch me wasting money on expensive jewelry or a fancy car. Although I would like to have a Volkswagen T1...</p>
+                
+                <h3>What I Actually Do</h3>
+                <p>Right now, I work in social media while dreaming of financial independence. In my free time, I enjoy staring at the garden, experimenting with different tea blends (although my favorites are English Breakfast and Earl Grey), playing retro games, and trying to learn languages. I also enjoy traveling.</p>
+                
+                <p>I also built this website, which was honestly more fun than anything I've done at my day job in months.</p>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="section">
+            <h2 class="section-title">🌱 What I Believe In</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-emoji">☕</div>
+                    <div class="value-title">Slow Mornings</div>
+                    <div class="value-desc">Coffee/tea should be savored, not rushed</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-emoji">🌿</div>
+                    <div class="value-title">Simple Living</div>
+                    <div class="value-desc">Less stuff, more peace</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-emoji">📚</div>
+                    <div class="value-title">Learning for Joy</div>
+                    <div class="value-desc">Not everything needs to be "productive"</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-emoji">🧘</div>
+                    <div class="value-title">Rest as Resistance</div>
+                    <div class="value-desc">Taking breaks in a hustle-obsessed world</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-emoji">🌱</div>
+                    <div class="value-title">Growth Without Grind</div>
+                    <div class="value-desc">Personal development can be gentle</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-emoji">🐸</div>
+                    <div class="value-title">Frog Energy</div>
+                    <div class="value-desc">Content, present, unbothered</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Journey Section -->
+        <div class="section">
+            <h2 class="section-title">🛤️ My Journey to Here</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2015-2018: University Years</div>
+                    <div class="timeline-desc">
+                        Studied something practical while the best part was honestly drinking beer with friends. At least I was honest about my priorities back then!
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020-2023: Working Life Begins</div>
+                    <div class="timeline-desc">
+                        Got into the "real world" of work. Tried different roles, got some experience, but never felt that spark of genuine interest everyone talks about.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2024-2025: The Awakening</div>
+                    <div class="timeline-desc">
+                        Some more work but hating it very much. Started seriously questioning if this whole traditional career thing was really for me. Spoiler alert: it wasn't.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025: I Want Out</div>
+                    <div class="timeline-desc">
+                        Decided to try something completely unconventional: asking the internet to help fund a more intentional way of living. Built this website and started the experiment. Here we are!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="section">
+            <h2 class="section-title">🤔 Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Are you actually serious about this?</div>
+                <div class="faq-answer">
+                    100% serious, though I maintain a sense of humor about it. I genuinely believe there are better ways to live than the traditional 9-5 grind for people like me, and I'm willing to try unconventional methods to achieve that. I understand that many people love their careers, have families to support, or find fulfillment in traditional work - but that's just not me.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What if this actually works?</div>
+                <div class="faq-answer">
+                    Then I'll be the happiest frog on the internet! I'll invest the money wisely, document the journey, and hopefully inspire others to pursue their own version of intentional living.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What if it doesn't work?</div>
+                <div class="faq-answer">
+                    Then I'll have learned a lot, met some amazing people online, and still be better off than if I'd never tried. Plus, I'll have some great stories to tell.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do you actually like frogs?</div>
+                <div class="faq-answer">
+                    I do! They're peaceful, content, and mind their own business. Plus, they're perfectly happy sitting still for long periods of time, which is basically my career goal.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What's your backup plan?</div>
+                <div class="faq-answer">
+                    Keep working my day job while building up savings and looking for remote work opportunities. This experiment is a bonus, not my only strategy for escaping the traditional workplace.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Thanks for taking the time to learn more about me! 🐸</p>
+            <p style="margin-top: 10px;">If you have questions I didn't answer, feel free to reach out: rafal@fundmychill.com</p>
+            <p style="margin-top: 15px;">
+                <a href="index.html" class="nav-link">🏠 Back to Main Page</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity to the avatar
+        document.querySelector('.avatar').addEventListener('click', function() {
+            const messages = [
+                "🐸 Thanks for reading about me!",
+                "☕ Want some tea? I'm making chamomile!",
+                "🌱 Did you know frogs are great listeners?",
+                "💚 You're pretty cool for reading this far!",
+                "🍃 Living the lily pad dream, one day at a time!"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = randomMessage;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(76, 205, 196, 0.9);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 20px;
+                font-weight: bold;
+                z-index: 1000;
+                animation: fadeInOut 2s ease-in-out forwards;
+            `;
+            
+            document.body.appendChild(messageDiv);
+            setTimeout(() => messageDiv.remove(), 2000);
+        });
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

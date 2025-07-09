@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐸 What Kind of Chill Frog Are You? - Personality Quiz 🐸</title>
+    <meta property="og:title" content="What Kind of Chill Frog Are You? 🐸">
+    <meta property="og:description" content="Discover your inner frog personality! Are you a Tea Ceremony Master or a Garden Zen Guru?">
+    <meta property="og:image" content="https://your-domain.com/frog-quiz-image.jpg">
+    <meta property="og:url" content="https://your-domain.com/frog-quiz.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #7fcdcd 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .quiz-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid #4ecdc4;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .quiz-header::before {
+            content: "VIRAL FROG ENERGY";
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #2d5a27;
+            margin-bottom: 15px;
+            animation: gentle-wiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-1deg); }
+            75% { transform: rotate(1deg); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #3d7c47;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #4ecdc4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 101;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #ff6b6b;
+        }
+
+        .question-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid #96ceb4;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-number {
+            background: #4ecdc4;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            color: #2d5a27;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .answers {
+            display: grid;
+            gap: 12px;
+        }
+
+        .answer-btn {
+            background: #f0fff0;
+            color: #2d5a27;
+            padding: 15px 20px;
+            border: 2px solid #96ceb4;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .answer-btn:hover {
+            background: #4ecdc4;
+            color: white;
+            transform: translateX(5px);
+            border-color: #4ecdc4;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(45deg, #4ecdc4, #96ceb4);
+            height: 8px;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #2d5a27;
+            font-weight: bold;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .result-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            border: 4px solid #ffd700;
+            text-align: center;
+            display: none;
+            position: relative;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: resultReveal 1s ease-out;
+        }
+
+        @keyframes resultReveal {
+            0% { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .result-container::before {
+            content: "YOUR FROG DESTINY";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            background: #ffd700;
+            color: #333;
+            padding: 8px 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .result-frog {
+            font-size: 8rem;
+            margin: 20px 0;
+            animation: celebration 2s ease-in-out infinite;
+        }
+
+        @keyframes celebration {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .result-title {
+            font-size: 2.2rem;
+            color: #2d5a27;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .result-subtitle {
+            font-size: 1.3rem;
+            color: #3d7c47;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .result-description {
+            font-size: 1.1rem;
+            color: #3d7c47;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .result-traits {
+            background: #f0fff0;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #4ecdc4;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .trait-title {
+            font-weight: bold;
+            color: #2d5a27;
+            margin-bottom: 10px;
+        }
+
+        .trait-list {
+            color: #3d7c47;
+        }
+
+        .share-result {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .share-result:hover {
+            background: #4ecdc4;
+            transform: scale(1.05);
+        }
+
+        .cta-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            border: 3px dashed #ff6b6b;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 1.5rem;
+            color: #2d5a27;
+            margin-bottom: 15px;
+        }
+
+        .cta-btn {
+            background: #4ecdc4;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            background: #ff6b6b;
+            transform: translateY(-2px);
+        }
+
+        .restart-btn {
+            background: #96ceb4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: #ff6b6b;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .result-frog {
+                font-size: 6rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Back to Main</a>
+    
+    <div class="container">
+        <div class="quiz-header">
+            <h1 class="title">🐸 What Kind of Chill Frog Are You? 🐸</h1>
+            <p class="subtitle">Discover your inner frog personality and find your perfect chill vibe!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-text" id="progressText">Question 1 of 8</div>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question-container active" id="question1">
+            <div class="question-number">Question 1/8</div>
+            <div class="question-text">What's your ideal way to spend a Saturday morning?</div>
+            <div class="answers">
+                <button class="answer-btn" onclick="answer(1, 'tea')">Brewing the perfect cup of tea while watching the sunrise ☕</button>
+                <button class="answer-btn" onclick="answer(1, 'garden')">Quietly tending to plants in my garden 🌱</button>
+                <button class="answer-btn" onclick="answer(1, 'cozy')">Still in bed, reading a book with soft music playing 📚</button>
+                <button class="answer-btn" onclick="answer(1, 'creative')">Working on a creative project at my own pace 🎨</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-container" id="question2">
+            <div class="question-number">Question 2/8</div>
+            <div class="question-text">What's your relationship with stress?</div>
+            <div class="answers">
+                <button class="answer-btn" onclick="answer(2, 'tea')">I have specific rituals that help me stay calm 🧘</button>
+                <button class="answer-btn" onclick="answer(2, 'garden')">Nature and growing things help me find peace 🌿</button>
+                <button class="answer-btn" onclick="answer(2, 'cozy')">I hide under blankets until it goes away 😴</button>
+                <button class="answer-btn" onclick="answer(2, 'creative')">I channel it into creative expression 🎭</button>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-container" id="question3">
+            <div class="question-number">Question 3/8</div>
+            <div class="question-text">Pick your dream living situation:</div>
+            <div class="answers">
+                <button class="answer-btn" onclick="answer(3, 'tea')">Minimalist cottage with a perfect tea setup 🏡</button>
+                <button class="answer-btn" onclick="answer(3, 'garden')">House with a huge garden and greenhouse 🌺</button>
+                <button class="answer-btn" onclick="answer(3, 'cozy')">Cozy apartment with soft lighting and books everywhere 📖</button>
+                <button class="answer-btn" onclick="answer(3, 'creative')">Artistic loft with natural light and space to create ✨</button>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-container" id="question4">
+            <div class="question-number">Question 4/8</div>
+            <div class="question-text">What's your superpower in friendships?</div>
+            <div class="answers">
+                <button class="answer-btn" onclick="answer(4, 'tea')">I'm the wise one who gives thoughtful advice 💭</button>
+                <button class="answer-btn" onclick="answer(4, 'garden')">I help others grow and flourish 🌸</button>
+                <button class="answer-btn" onclick="answer(4, 'cozy')">I create safe, comfortable spaces for people 🤗</button>
+                <button class="answer-btn" onclick="answer(4, 'creative')">I inspire others to express themselves 🎪</button>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-container" id="question5">
+            <div class="question-number">Question 5/8</div>
+            <div class="question-text">How do you approach learning new things?</div>
+            <div class="answers">
+                <button class="answer-btn" onclick="answer(5, 'tea')">Slowly and mindfully, mastering each step 🎯</button>
+                <button class="answer-btn" onclick="answer(5, 'garden')">Through hands-on experience and patience 🌱</button>
+                <button class="answer-btn" onclick="answer(5, 'cozy')">At my own pace with lots of breaks ⏰</button>
+                <button class="answer-btn" onclick="answer(5, 'creative')">By experimenting and trying new approaches 🔬</button>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-container" id="question6">
+            <div class="question-number">Question 6/8</div>
+            <div class="question-text">What's your ideal work situation?</div>
+            <div class="answers">
+                <button class="answer-btn" onclick="answer(6, 'tea')">Consulting or teaching - sharing wisdom when I want to 👩‍🏫</button>
+                <button class="answer-btn" onclick="answer(6, 'garden')">Working with my hands, maybe farming or landscaping 🚜</button>
+                <button class="answer-btn" onclick="answer(6, 'cozy')">Work? What work? Living off passive income ideally 💰</button>
+                <button class="answer-btn" onclick="answer(6, 'creative')">Freelance creative work on my own terms 🎨</button>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-container" id="question7">
+            <div class="question-number">Question 7/8</div>
+            <div class="question-text">What's your biggest life philosophy?</div>
+            <div class="answers">
+                <button class="answer-btn" onclick="answer(7, 'tea')">Mindfulness and presence in every moment 🧘‍♀️</button>
+                <button class="answer-btn" onclick="answer(7, 'garden')">Everything grows in its own time 🌳</button>
+                <button class="answer-btn" onclick="answer(7, 'cozy')">Comfort and contentment over ambition 😌</button>
+                <button class="answer-btn" onclick="answer(7, 'creative')">Life is art, make it beautiful 🎭</button>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-container" id="question8">
+            <div class="question-number">Question 8/8</div>
+            <div class="question-text">How do people usually describe you?</div>
+            <div class="answers">
+                <button class="answer-btn" onclick="answer(8, 'tea')">Wise, calm, and thoughtful 🦉</button>
+                <button class="answer-btn" onclick="answer(8, 'garden')">Nurturing, patient, and grounded 🌍</button>
+                <button class="answer-btn" onclick="answer(8, 'cozy')">Relaxed, easygoing, and comfortable to be around 😊</button>
+                <button class="answer-btn" onclick="answer(8, 'creative')">Unique, expressive, and inspiring 🌟</button>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="result-container" id="resultContainer">
+            <div class="result-frog" id="resultFrog">🐸</div>
+            <div class="result-title" id="resultTitle">Your Frog Type</div>
+            <div class="result-subtitle" id="resultSubtitle">Subtitle</div>
+            <div class="result-description" id="resultDescription">Description</div>
+            <div class="result-traits" id="resultTraits">Traits</div>
+            
+            <button class="share-result" onclick="shareResult()">Share My Frog Type! 🐸</button>
+            <button class="share-result" onclick="shareTwitter()">Tweet Result 🐦</button>
+            
+            <div class="cta-section">
+                <div class="cta-title">Want to support a fellow chill frog?</div>
+                <p style="color: #3d7c47; margin-bottom: 15px;">
+                    If this quiz made you smile, consider helping fund my tea-drinking, garden-tending lifestyle! 
+                    Every dollar helps me avoid setting an alarm clock! ☕🌱
+                </p>
+                <a href="index.html" class="cta-btn">Support the Lazy Frog Life 💚</a>
+                <a href="donors.html" class="cta-btn">See Other Amazing Supporters</a>
+            </div>
+            
+            <button class="restart-btn" onclick="restartQuiz()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        let scores = {
+            tea: 0,
+            garden: 0,
+            cozy: 0,
+            creative: 0
+        };
+
+        const frogTypes = {
+            tea: {
+                emoji: "🍵",
+                title: "Tea Ceremony Master Frog",
+                subtitle: "The Zen Sipper of Serenity",
+                description: "You are the epitome of mindful living! You understand that true happiness comes from savoring life's simple pleasures. Whether it's the perfect water temperature, the ideal steep time, or the quiet moments of reflection, you find magic in ritual and mindfulness. You're the friend people come to for wisdom and calm energy.",
+                traits: "🍵 Loves rituals and mindful practices<br>🧘 Natural wisdom and calm presence<br>⏰ Values quality over quantity<br>🌅 Finds peace in quiet moments<br>💭 Thoughtful and contemplative"
+            },
+            garden: {
+                emoji: "🌱",
+                title: "Garden Zen Guru Frog",
+                subtitle: "The Patient Cultivator of Growth",
+                description: "You understand that beautiful things take time to grow, and you're willing to tend to them with patience and love. You find deep satisfaction in nurturing - whether it's plants, people, or projects. You believe in natural rhythms and organic growth, and you create spaces where others can flourish.",
+                traits: "🌱 Patient and nurturing by nature<br>🌿 Connected to natural rhythms<br>🌸 Helps others grow and flourish<br>🌍 Grounded and stable energy<br>🌺 Creates beautiful, peaceful spaces"
+            },
+            cozy: {
+                emoji: "😴",
+                title: "Professional Chill Frog",
+                subtitle: "The Master of Maximum Comfort",
+                description: "You've figured out the secret to life: comfort is king! You're not lazy, you're efficiently prioritizing what actually matters - feeling good and being content. You create cozy sanctuaries wherever you go and you're the friend who always knows how to make any situation more comfortable and relaxed.",
+                traits: "😌 Masters the art of relaxation<br>🛋️ Creates ultimate comfort zones<br>📚 Values simple pleasures<br>☁️ Stress-resistant and easygoing<br>🤗 Makes others feel at ease"
+            },
+            creative: {
+                emoji: "🎨",
+                title: "Artistic Soul Frog",
+                subtitle: "The Inspired Creator of Beauty",
+                description: "You see the world as your canvas and life as your masterpiece! You bring beauty and creativity to everything you touch. You understand that true fulfillment comes from expressing your authentic self and inspiring others to do the same. You're the friend who adds color and magic to ordinary moments.",
+                traits: "🎨 Brings beauty to everything<br>✨ Inspires others to be creative<br>🌈 Sees possibilities everywhere<br>🎭 Authentic self-expression<br>💫 Adds magic to ordinary moments"
+            }
+        };
+
+        function answer(questionNum, type) {
+            scores[type]++;
+            
+            // Hide current question
+            document.getElementById(`question${questionNum}`).classList.remove('active');
+            
+            if (questionNum < 8) {
+                // Show next question
+                setTimeout(() => {
+                    currentQuestion++;
+                    document.getElementById(`question${currentQuestion}`).classList.add('active');
+                    updateProgress();
+                }, 300);
+            } else {
+                // Show results
+                setTimeout(() => {
+                    showResults();
+                }, 300);
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / 8) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Question ${currentQuestion} of 8`;
+        }
+
+        function showResults() {
+            // Find highest score
+            let maxScore = 0;
+            let resultType = 'tea';
+            
+            for (const [type, score] of Object.entries(scores)) {
+                if (score > maxScore) {
+                    maxScore = score;
+                    resultType = type;
+                }
+            }
+            
+            const result = frogTypes[resultType];
+            
+            // Update result display
+            document.getElementById('resultFrog').textContent = result.emoji;
+            document.getElementById('resultTitle').textContent = result.title;
+            document.getElementById('resultSubtitle').textContent = result.subtitle;
+            document.getElementById('resultDescription').textContent = result.description;
+            document.getElementById('resultTraits').innerHTML = `<div class="trait-title">Your Frog Traits:</div><div class="trait-list">${result.traits}</div>`;
+            
+            // Hide quiz, show results
+            document.querySelector('.progress-bar').style.display = 'none';
+            document.getElementById('resultContainer').classList.add('show');
+            
+            // Store result for sharing
+            window.frogResult = result;
+        }
+
+        function shareResult() {
+            const result = window.frogResult;
+            if (navigator.share) {
+                navigator.share({
+                    title: `I'm a ${result.title}!`,
+                    text: `I just discovered I'm a ${result.title} - ${result.subtitle}! Find out what kind of chill frog you are!`,
+                    url: window.location.href
+                });
+            } else {
+                copyLink();
+            }
+        }
+
+        function shareTwitter() {
+            const result = window.frogResult;
+            const text = `I'm a ${result.title} ${result.emoji}! ${result.subtitle} 🐸\n\nFind out what kind of chill frog YOU are!`;
+            const url = window.location.href;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link copied! Share your frog personality! 🐸');
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 1;
+            scores = { tea: 0, garden: 0, cozy: 0, creative: 0 };
+            
+            // Hide result
+            document.getElementById('resultContainer').classList.remove('show');
+            
+            // Show progress bar
+            document.querySelector('.progress-bar').style.display = 'block';
+            
+            // Hide all questions
+            for (let i = 1; i <= 8; i++) {
+                document.getElementById(`question${i}`).classList.remove('active');
+            }
+            
+            // Show first question
+            setTimeout(() => {
+                document.getElementById('question1').classList.add('active');
+                updateProgress();
+            }, 300);
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>

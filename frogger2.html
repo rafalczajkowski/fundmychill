@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐸 Chill Frogger | Rafał's Lily Pad Adventure</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #7fcdcd 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            transition: background 0.5s ease;
+        }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #4ecdc4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            background: linear-gradient(45deg, #96ceb4, #4ecdc4);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(45deg, #4ecdc4, #96ceb4);
+            transform: translateY(-1px);
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid #4ecdc4;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .game-title {
+            font-size: 2rem;
+            color: #2d5a27;
+            margin-bottom: 10px;
+        }
+
+        .game-subtitle {
+            color: #3d7c47;
+            margin-bottom: 20px;
+        }
+
+        .game-board {
+            width: 500px;
+            height: 400px;
+            background: #a2d2ff;
+            border: 3px solid #2d5a27;
+            border-radius: 10px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.5s ease;
+        }
+
+        .road {
+            position: absolute;
+            width: 100%;
+            height: 40px;
+            background: #404040;
+            border-top: 2px dashed #ffff00;
+            border-bottom: 2px dashed #ffff00;
+            transition: background 0.5s ease;
+        }
+
+        .safe-zone {
+            position: absolute;
+            width: 100%;
+            height: 40px;
+            background: #90ee90;
+            transition: background 0.5s ease;
+        }
+
+        /* --- Lane Layout --- */
+        .end-zone { top: 0; }
+        .road.lane-1 { top: 40px; }
+        .road.lane-2 { top: 80px; }
+        .safe-zone.middle-1 { top: 120px; }
+        .road.lane-3 { top: 160px; }
+        .road.lane-4 { top: 200px; }
+        .safe-zone.middle-2 { top: 240px; }
+        .road.lane-5 { top: 280px; }
+        .safe-zone.middle-3 { top: 320px; }
+        .start-zone { top: 360px; }
+        
+        .frog {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.1s ease;
+            z-index: 10;
+        }
+
+        .car {
+            position: absolute;
+            width: 40px;
+            height: 25px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background: #f0fff0;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #4ecdc4;
+        }
+
+        .score-item, .score-label, .score-value { transition: color 0.5s ease; }
+        .score-label { font-size: 0.9rem; color: #666; margin-bottom: 5px; }
+        .score-value { font-size: 1.2rem; font-weight: bold; color: #2d5a27; }
+
+        .controls {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px dashed #4ecdc4;
+        }
+
+        .btn {
+            background: #4ecdc4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover { background: #ff6b6b; transform: translateY(-1px); }
+
+        .game-over, .victory {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: none;
+        }
+        .game-over { background: #ffebee; border: 2px solid #f44336; }
+        .victory { background: #e8f5e8; border: 2px solid #4caf50; }
+
+        @media (max-width: 768px) {
+            .game-board { width: 100%; max-width: 350px; height: 280px; }
+            .nav-links { flex-direction: column; align-items: center; }
+            .nav-link { width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">🏠 Home</a>
+            <a href="about.html" class="nav-link">🐸 About</a>
+            <a href="blog.html" class="nav-link">📖 Journal</a>
+            <a href="tea.html" class="nav-link">🍵 Tea Guide</a>
+            <a href="coffee.html" class="nav-link">☕ Coffee Guide</a>
+            <a href="supporters.html" class="nav-link">💚 Supporters</a>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <h1 class="game-title">🐸 Chill Frogger</h1>
+        <p class="game-subtitle">Help Rafał reach the lily pad while avoiding the chaos of modern life!</p>
+        
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Lives</div>
+                <div class="score-value" id="lives">3</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Level</div>
+                <div class="score-value" id="level">1</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Score</div>
+                <div class="score-value" id="score">0</div>
+            </div>
+        </div>
+
+        <div class="game-board" id="gameBoard">
+            <div class="safe-zone end-zone"></div>
+            <div class="road lane-1"></div>
+            <div class="road lane-2"></div>
+            <div class="safe-zone middle-1"></div>
+            <div class="road lane-3"></div>
+            <div class="road lane-4"></div>
+            <div class="safe-zone middle-2"></div>
+            <div class="road lane-5"></div>
+            <div class="safe-zone middle-3"></div>
+            <div class="safe-zone start-zone"></div>
+            <div class="frog" id="frog">🐸</div>
+        </div>
+
+        <div class="controls">
+            <h3 style="color: #2d5a27; margin-bottom: 10px;">Controls</h3>
+            <p style="margin-bottom: 10px;">Use ARROW KEYS or buttons to move</p>
+            <button class="btn" onclick="moveFrog('up')">↑</button><br>
+            <button class="btn" onclick="moveFrog('left')">←</button>
+            <button class="btn" onclick="moveFrog('down')">↓</button>
+            <button class="btn" onclick="moveFrog('right')">→</button><br>
+            <button class="btn" onclick="startGame()">Start Game</button>
+            <button class="btn" onclick="resetGame()">Reset</button>
+        </div>
+
+        <div class="game-over" id="gameOver">
+            <h3 style="color: #d32f2f; margin-bottom: 10px;">Game Over! 💔</h3>
+            <p>The hustle culture got you! But don't worry, every frog learns from their mistakes.</p>
+            <button class="btn" onclick="resetGame()">Try Again</button>
+        </div>
+
+        <div class="victory" id="victory">
+            <h3 style="color: #388e3c; margin-bottom: 10px;">Victory! 🎉</h3>
+            <p>You've reached the lily pad of financial independence! Time to sip tea and enjoy the chill life.</p>
+            <button class="btn" onclick="nextLevel()">Next Level</button>
+        </div>
+
+        <div style="margin-top: 20px; color: #3d7c47; font-size: 0.9rem;">
+            <p><strong>Game Philosophy:</strong> Just like escaping the 9-5, timing and patience are key. Avoid the rush (cars) and find your flow. Every safe zone reached is a small victory! 🌱</p>
+        </div>
+    </div>
+
+    <script>
+        const levelThemes = [
+            { name: "Spring Meadow", boardBg: "#a2d2ff", roadBg: "#404040", safeZoneBg: "#90ee90", startZoneBg: "#98fb98", endZoneBg: "#228b22", carEmojis: ['🚗', '🚙', '🚐', '🚛', '📱', '💼', '⏰'] },
+            { name: "Summer City", boardBg: "#f7b267", roadBg: "#50514f", safeZoneBg: "#f4f1de", startZoneBg: "#e0e0e0", endZoneBg: "#c5c3c6", carEmojis: ['🚕', '🚓', '🚑', '🛵', '🚲', '🏙️', '☕'] },
+            { name: "Autumn Rush", boardBg: "#e07a5f", roadBg: "#3d405b", safeZoneBg: "#f2cc8f", startZoneBg: "#81b29a", endZoneBg: "#6d6875", carEmojis: ['🎃', '🍂', '🍁', '🚜', '🚌', '🐿️'] },
+            { name: "Winter Chill", boardBg: "#cad2c5", roadBg: "#84a98c", safeZoneBg: "#f0f8ff", startZoneBg: "#ffffff", endZoneBg: "#52796f", carEmojis: ['🥶', '❄️', '☃️', '🏂', '🚚', '🎁'] }
+        ];
+
+        let gameState = {
+            frogX: 0, frogY: 0, lives: 3, level: 1, score: 0, gameRunning: false, cars: []
+        };
+
+        const FROG_SIZE = 30, MOVE_DISTANCE = 40, HORIZONTAL_MOVE_DISTANCE = 20;
+
+        function applyLevelTheme() {
+            const theme = levelThemes[(gameState.level - 1) % levelThemes.length];
+            document.getElementById('gameBoard').style.background = theme.boardBg;
+            document.querySelectorAll('.road').forEach(el => el.style.background = theme.roadBg);
+            document.querySelectorAll('.safe-zone.middle-1, .safe-zone.middle-2, .safe-zone.middle-3').forEach(el => el.style.background = theme.safeZoneBg);
+            document.querySelector('.start-zone').style.background = theme.startZoneBg;
+            document.querySelector('.end-zone').style.background = theme.endZoneBg;
+        }
+
+        function setupLevel() {
+            applyLevelTheme();
+            createCars();
+            resetFrogPosition();
+            updateDisplay();
+        }
+
+        function resetFrogPosition() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameState.frogX = (gameBoard.offsetWidth - FROG_SIZE) / 2;
+            gameState.frogY = gameBoard.offsetHeight - FROG_SIZE - 5;
+            updateFrogPosition();
+        }
+
+        function updateFrogPosition() {
+            document.getElementById('frog').style.left = gameState.frogX + 'px';
+            document.getElementById('frog').style.top = gameState.frogY + 'px';
+        }
+
+        function createCars() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.querySelectorAll('.car').forEach(car => car.remove());
+            gameState.cars = [];
+            
+            const theme = levelThemes[(gameState.level - 1) % levelThemes.length];
+            const roadTops = [40, 80, 160, 200, 280];
+
+            for (let i = 0; i < 10; i++) {
+                const car = document.createElement('div');
+                car.className = 'car';
+                car.textContent = theme.carEmojis[Math.floor(Math.random() * theme.carEmojis.length)];
+                
+                const roadY = roadTops[i % 5];
+                const carY = roadY + (40 - 25) / 2;
+                const direction = i % 2 === 0 ? 1 : -1;
+                const startX = direction === 1 ? -50 : gameBoard.offsetWidth + 10;
+
+                car.style.top = carY + 'px';
+                car.style.left = startX + 'px';
+                gameBoard.appendChild(car);
+                
+                gameState.cars.push({
+                    element: car, x: startX, y: carY, direction: direction,
+                    speed: (1 + Math.random() * 1.5) + (gameState.level * 0.4) // Speed increases with level
+                });
+            }
+        }
+
+        function moveFrog(direction) {
+            if (!gameState.gameRunning) return;
+            const gameBoard = document.getElementById('gameBoard');
+            switch(direction) {
+                case 'up': gameState.frogY = Math.max(0, gameState.frogY - MOVE_DISTANCE); gameState.score += 10; break;
+                case 'down': gameState.frogY = Math.min(gameBoard.offsetHeight - FROG_SIZE, gameState.frogY + MOVE_DISTANCE); break;
+                case 'left': gameState.frogX = Math.max(0, gameState.frogX - HORIZONTAL_MOVE_DISTANCE); break;
+                case 'right': gameState.frogX = Math.min(gameBoard.offsetWidth - FROG_SIZE, gameState.frogX + HORIZONTAL_MOVE_DISTANCE); break;
+            }
+            updateFrogPosition();
+            updateDisplay();
+            checkVictory();
+        }
+
+        function updateCars() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameState.cars.forEach(car => {
+                car.x += car.direction * car.speed;
+                car.element.style.left = car.x + 'px';
+                if (car.direction === 1 && car.x > gameBoard.offsetWidth) car.x = -50;
+                else if (car.direction === -1 && car.x < -50) car.x = gameBoard.offsetWidth + 10;
+            });
+        }
+        
+        function isColliding(x1, y1, x2, y2, w2, h2) {
+            return x1 < x2 + w2 && x1 + FROG_SIZE > x2 && y1 < y2 + h2 && y1 + FROG_SIZE > y2;
+        }
+
+        function checkCollisions() {
+            for (const car of gameState.cars) {
+                if (isColliding(gameState.frogX, gameState.frogY, car.x, car.y, 40, 25)) {
+                    loseLife();
+                    return; // Exit after one collision is found
+                }
+            }
+        }
+
+        function checkVictory() {
+            if (gameState.frogY < 40) {
+                gameState.score += 100 * gameState.level;
+                gameState.gameRunning = false;
+                updateDisplay();
+                document.getElementById('victory').style.display = 'block';
+            }
+        }
+
+        function loseLife() {
+            if (!gameState.gameRunning) return;
+            gameState.lives--;
+            updateDisplay();
+            if (gameState.lives <= 0) {
+                gameState.gameRunning = false;
+                document.getElementById('gameOver').style.display = 'block';
+            } else {
+                resetFrogPosition();
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('lives').textContent = gameState.lives;
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('score').textContent = gameState.score;
+        }
+
+        function startGame() {
+            if (gameState.gameRunning) return;
+            resetGame(); // Always start a fresh game from level 1
+            gameState.gameRunning = true;
+            gameLoop();
+        }
+
+        function resetGame() {
+            gameState.gameRunning = false;
+            gameState.level = 1;
+            gameState.score = 0;
+            gameState.lives = 3;
+            document.getElementById('gameOver').style.display = 'none';
+            document.getElementById('victory').style.display = 'none';
+            setupLevel();
+        }
+
+        function nextLevel() {
+            gameState.level++;
+            gameState.lives = 3;
+            gameState.gameRunning = true;
+            document.getElementById('victory').style.display = 'none';
+            setupLevel();
+            gameLoop();
+        }
+
+        function gameLoop() {
+            if (!gameState.gameRunning) return;
+            updateCars();
+            checkCollisions();
+            requestAnimationFrame(gameLoop);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (gameState.gameRunning) {
+                switch(e.key) {
+                    case 'ArrowUp': e.preventDefault(); moveFrog('up'); break;
+                    case 'ArrowDown': e.preventDefault(); moveFrog('down'); break;
+                    case 'ArrowLeft': e.preventDefault(); moveFrog('left'); break;
+                    case 'ArrowRight': e.preventDefault(); moveFrog('right'); break;
+                }
+            }
+        });
+
+        window.addEventListener('load', resetGame);
+        window.addEventListener('resize', resetGame);
+    </script>
+</body>
+</html>

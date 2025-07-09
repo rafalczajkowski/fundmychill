@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☕ Coffee Guide & Reviews | Rafał's Caffeine Chronicles</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #d4af37 0%, #f4e4bc 50%, #deb887 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #8b4513;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            background: linear-gradient(45deg, #d4af37, #8b4513);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(45deg, #8b4513, #d4af37);
+            transform: translateY(-1px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #8b4513;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #5d4037;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #6d4c41;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #8b4513;
+            margin: 20px 0;
+            text-align: center;
+            color: #6d4c41;
+        }
+
+        .coffee-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #d4af37;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .beans-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #8b4513;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #5d4037;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .coffee-card {
+            background: #f8f5f0;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #8b4513;
+        }
+
+        .bean-card {
+            background: #faf8f5;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #8b4513;
+        }
+
+        .coffee-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #5d4037;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .coffee-emoji {
+            font-size: 1.5rem;
+        }
+
+        .coffee-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #5d4037;
+        }
+
+        .coffee-description {
+            color: #6d4c41;
+            margin: 15px 0;
+        }
+
+        .rafal-rating {
+            background: #fff3e0;
+            border: 1px solid #ff9800;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .rating-title {
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+
+        .stars {
+            font-size: 1.2rem;
+            margin: 5px 0;
+        }
+
+        .brewing-guide {
+            background: #efebe9;
+            border: 2px solid #8b4513;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .favorites-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 225, 0.9));
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #ff9800;
+            margin-bottom: 30px;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .method-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #d4af37;
+        }
+
+        .method-title {
+            font-weight: bold;
+            color: #5d4037;
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .beans-explainer {
+            background: #f4f1eb;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #8b4513;
+            margin: 20px 0;
+            text-align: center;
+            color: #6d4c41;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .coffee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-link {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="about.html" class="nav-link">🐸 About</a>
+                <a href="blog.html" class="nav-link">📖 Journal</a>
+                <a href="tea.html" class="nav-link">🍵 Tea Guide</a>
+                <a href="coffee.html" class="nav-link">☕ Coffee Guide</a>
+                <a href="supporters.html" class="nav-link">💚 Supporters</a>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="title">☕ Coffee Guide & Reviews</h1>
+            <p class="subtitle">Rafał's caffeine-fueled adventures and honest coffee opinions</p>
+            <div class="intro">
+                <p>While tea is my main love, coffee has its place in the chill lifestyle. Sometimes you need that extra kick, 
+                and sometimes you just want to sit in a café pretending to work while actually people-watching. Here's my coffee wisdom!</p>
+            </div>
+        </div>
+
+        <!-- Rafał's Coffee Favorites -->
+        <div class="favorites-section">
+            <h2 class="section-title">⭐ Rafał's Coffee Favorites</h2>
+            <div class="coffee-grid">
+                <div class="coffee-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🇹🇷</span>
+                        Turkish/Greek Coffee
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Strength</div>
+                            <div class="stat-value">Very Strong</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Preparation</div>
+                            <div class="stat-value">Ritual</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Best With</div>
+                            <div class="stat-value">Sweet treats</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Vibe</div>
+                            <div class="stat-value">Contemplative</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        This is coffee as meditation. The slow brewing process forces you to be present, and the result is intensely flavorful. 
+                        You sip it slowly while the grounds settle, perfect for those moments when you want to feel connected to centuries of coffee tradition. 
+                        Plus, it makes you look sophisticated even if you're just avoiding your inbox.
+                    </div>
+                    <div class="rafal-rating">
+                        <div class="rating-title">Rafał's Rating:</div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <div>"The perfect excuse to sit still and do nothing while calling it 'cultural appreciation.'"</div>
+                    </div>
+                </div>
+
+                <div class="coffee-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🇺🇸</span>
+                        Americano
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Strength</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Preparation</div>
+                            <div class="stat-value">Simple</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Best With</div>
+                            <div class="stat-value">Morning routine</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Vibe</div>
+                            <div class="stat-value">No-nonsense</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        Clean, straightforward, and reliable. It's espresso that won't overwhelm you - perfect for when you want coffee flavor 
+                        without the intensity. Great for sipping while staring out windows and contemplating life choices. 
+                        You can drink it slowly without it getting cold and bitter.
+                    </div>
+                    <div class="rafal-rating">
+                        <div class="rating-title">Rafał's Rating:</div>
+                        <div class="stars">⭐⭐⭐⭐☆</div>
+                        <div>"The coffee equivalent of a reliable friend - always there when you need it, never dramatic."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coffee Bean Origins -->
+        <div class="beans-section">
+            <h2 class="section-title">🌍 Coffee Bean Origins & Varieties</h2>
+            <div class="beans-explainer">
+                <p>Coffee beans are basically seeds from coffee cherries, and where they grow makes a huge difference in taste. 
+                Here are some regions and what they bring to your cup!</p>
+            </div>
+            <div class="coffee-grid">
+                <div class="bean-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🇪🇹</span>
+                        Ethiopian Coffee
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Flavor Profile</div>
+                            <div class="stat-value">Fruity & Floral</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Body</div>
+                            <div class="stat-value">Light-Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Acidity</div>
+                            <div class="stat-value">Bright</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Vibe</div>
+                            <div class="stat-value">Complex</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        The birthplace of coffee! Ethiopian beans often taste like they have fruit mixed in - berries, citrus, sometimes even wine-like notes. 
+                        Perfect for when you want coffee that tastes like it has a story to tell.
+                    </div>
+                </div>
+
+                <div class="bean-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🇨🇴</span>
+                        Colombian Coffee
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Flavor Profile</div>
+                            <div class="stat-value">Balanced & Nutty</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Body</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Acidity</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Vibe</div>
+                            <div class="stat-value">Reliable</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        The crowd-pleaser. Colombian coffee is well-balanced, smooth, and approachable. Not too acidic, not too heavy. 
+                        It's the coffee equivalent of a good friend - dependable and always welcome.
+                    </div>
+                </div>
+
+                <div class="bean-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🇬🇹</span>
+                        Guatemalan Antigua
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Flavor Profile</div>
+                            <div class="stat-value">Spicy & Smoky</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Body</div>
+                            <div class="stat-value">Full</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Acidity</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Vibe</div>
+                            <div class="stat-value">Bold</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        Grown in volcanic soil, so it has this earthy, spicy character. Sometimes you can taste hints of cocoa or even a subtle smokiness. 
+                        For when you want coffee with personality and depth.
+                    </div>
+                </div>
+
+                <div class="bean-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🏝️</span>
+                        Jamaican Blue Mountain
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Flavor Profile</div>
+                            <div class="stat-value">Mild & Sweet</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Body</div>
+                            <div class="stat-value">Light</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Acidity</div>
+                            <div class="stat-value">Low</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Vibe</div>
+                            <div class="stat-value">Luxurious</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        The fancy one that costs way too much but is supposedly amazing. Mild, smooth, and delicate. 
+                        Perfect for when you want to treat yourself or impress someone (if you can afford it).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coffee Types Guide -->
+        <div class="coffee-section">
+            <h2 class="section-title">☕ Coffee Types Explained</h2>
+            <div class="coffee-grid">
+                <div class="coffee-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">⚡</span>
+                        Espresso
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">High</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Size</div>
+                            <div class="stat-value">Small shot</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Time</div>
+                            <div class="stat-value">Quick hit</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Mood</div>
+                            <div class="stat-value">Intense</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        The base of most coffee drinks. Small, concentrated, and powerful. Perfect for when you need to feel alive quickly, 
+                        but too intense for casual sipping. Best enjoyed standing at a counter in Italy while gesturing dramatically.
+                    </div>
+                </div>
+
+                <div class="coffee-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🥛</span>
+                        Cappuccino
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Milk</div>
+                            <div class="stat-value">Steamed foam</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Time</div>
+                            <div class="stat-value">Morning</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Mood</div>
+                            <div class="stat-value">Cozy</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        Equal parts espresso, steamed milk, and foam. The perfect balance of coffee and comfort. 
+                        Great for when you want to feel sophisticated while still getting a caffeine boost.
+                    </div>
+                </div>
+
+                <div class="coffee-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🌊</span>
+                        Cold Brew
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">High</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Temperature</div>
+                            <div class="stat-value">Cold</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Time</div>
+                            <div class="stat-value">Summer</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Mood</div>
+                            <div class="stat-value">Chill</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        Smooth, less acidic, and refreshing. Perfect for hot days when you still need caffeine but don't want hot liquid. 
+                        Takes forever to make but worth the wait (like financial independence).
+                    </div>
+                </div>
+
+                <div class="coffee-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🏠</span>
+                        French Press
+                    </div>
+                    <div class="coffee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Caffeine</div>
+                            <div class="stat-value">Medium-High</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Method</div>
+                            <div class="stat-value">Immersion</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Time</div>
+                            <div class="stat-value">4 minutes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Mood</div>
+                            <div class="stat-value">Homey</div>
+                        </div>
+                    </div>
+                    <div class="coffee-description">
+                        Full-bodied and rich. Simple brewing method that produces consistently good coffee. 
+                        Perfect for when you want good coffee at home without fancy equipment.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coffee Culture & Philosophy -->
+        <div class="coffee-section">
+            <h2 class="section-title">🌍 Coffee Culture & Chill Philosophy</h2>
+            <div class="coffee-description" style="font-size: 1.1rem; text-align: center; margin-bottom: 25px;">
+                Coffee isn't just about caffeine - it's about creating moments of pause in our rushed world.
+            </div>
+            
+            <div class="method-grid">
+                <div class="method-item">
+                    <div class="method-title">The Turkish Coffee Ritual</div>
+                    <div>Grinding beans by hand, slowly heating in the cezve, watching for the perfect foam. 
+                    It's meditation disguised as morning routine. The whole process forces you to slow down.</div>
+                </div>
+                
+                <div class="method-item">
+                    <div class="method-title">Café Culture Appreciation</div>
+                    <div>Sometimes the best part isn't the coffee itself, but the excuse to sit somewhere different, 
+                    watch people, and exist outside your usual space. It's temporary location independence.</div>
+                </div>
+                
+                <div class="method-item">
+                    <div class="method-title">Quality Over Quantity</div>
+                    <div>One really good cup is better than three mediocre ones. This applies to coffee, 
+                    life choices, and probably most things worth doing.</div>
+                </div>
+                
+                <div class="method-item">
+                    <div class="method-title">The Art of Doing Nothing</div>
+                    <div>Coffee gives you permission to sit and think without feeling guilty about productivity. 
+                    It's the socially acceptable way to just... be.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brewing Guide -->
+        <div class="brewing-guide">
+            <h2 style="color: #5d4037; text-align: center; margin-bottom: 20px;">☕ Rafał's Coffee Brewing Tips</h2>
+            <div class="method-grid">
+                <div class="method-item">
+                    <div class="method-title">Turkish Coffee Method</div>
+                    <div><strong>1.</strong> Grind beans super fine (like powder)<br>
+                    <strong>2.</strong> Add coffee and sugar to cold water in cezve<br>
+                    <strong>3.</strong> Heat slowly, stirring until dissolved<br>
+                    <strong>4.</strong> Stop stirring, watch for foam to rise<br>
+                    <strong>5.</strong> Pour slowly, let grounds settle before drinking</div>
+                </div>
+                
+                <div class="method-item">
+                    <div class="method-title">Perfect Americano</div>
+                    <div><strong>1.</strong> Pull a good espresso shot (or use strong coffee)<br>
+                    <strong>2.</strong> Add hot water to taste (usually 1:2 ratio)<br>
+                    <strong>3.</strong> Don't overthink it - adjust to your preference<br>
+                    <strong>4.</strong> Enjoy the clean, simple flavor</div>
+                </div>
+                
+                <div class="method-item">
+                    <div class="method-title">General Coffee Wisdom</div>
+                    <div>• Fresh beans make a huge difference<br>
+                    • Water quality matters more than you think<br>
+                    • Grind right before brewing if possible<br>
+                    • Temperature: just off boiling for most methods</div>
+                </div>
+                
+                <div class="method-item">
+                    <div class="method-title">The Chill Approach</div>
+                    <div>Don't stress about perfect technique. The best coffee is the one you actually enjoy drinking. 
+                    Sometimes that's fancy single-origin, sometimes it's instant coffee while watching the sunrise.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coffee vs Tea Philosophy -->
+        <div class="coffee-section">
+            <h2 class="section-title">🍵☕ Coffee vs Tea: When to Choose What</h2>
+            <div class="coffee-grid">
+                <div class="coffee-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">☕</span>
+                        Choose Coffee When...
+                    </div>
+                    <div class="coffee-description">
+                        • You need to feel alert quickly<br>
+                        • You want an excuse to visit a café<br>
+                        • You're doing something that requires focus<br>
+                        • You want to feel like a sophisticated adult<br>
+                        • You're traveling and want to experience local coffee culture<br>
+                        • It's morning and you need to convince yourself you're ready for the day
+                    </div>
+                </div>
+                
+                <div class="coffee-card">
+                    <div class="coffee-name">
+                        <span class="coffee-emoji">🍵</span>
+                        Choose Tea When...
+                    </div>
+                    <div class="coffee-description">
+                        • You want to feel calm and centered<br>
+                        • You're reading or doing gentle activities<br>
+                        • You want something you can sip slowly<br>
+                        • It's evening and you don't want to stay awake all night<br>
+                        • You're contemplating life choices<br>
+                        • You want to feel like you have your act together (even if you don't)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Remember: the best beverage is whatever helps you pause and enjoy the moment ☕🍵</p>
+            <p style="margin-top: 10px;">Got coffee stories or recommendations? I'd love to hear them: rafal@fundmychill.com</p>
+            <p style="margin-top: 15px;">
+                <a href="tea.html" class="nav-link">🍵 Check out the Tea Guide too!</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

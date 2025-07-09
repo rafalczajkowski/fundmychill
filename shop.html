@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 Chill Shop | Rafał's Silly & Natural Products</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #ff6b9d;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            background: linear-gradient(45deg, #ff9a9e, #ff6b9d);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(45deg, #ff6b9d, #ff9a9e);
+            transform: translateY(-1px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #ff6b9d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #d63384;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #e83e8c;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            background: #fff0f3;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #ff6b9d;
+            margin: 20px 0;
+            text-align: center;
+            color: #e83e8c;
+        }
+
+        .shop-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #ff9a9e;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .featured-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 243, 0.9));
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #d63384;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .product-card {
+            background: #fefefe;
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid #ffb3d1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: #f8f9fa;
+            border: 2px dashed #ff9a9e;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #999;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        .product-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-emoji {
+            font-size: 1.6rem;
+        }
+
+        .product-description {
+            color: #6c757d;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .product-features {
+            background: #fff8fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9a9e;
+        }
+
+        .features-title {
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .features-list {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #28a745;
+            margin: 15px 0;
+        }
+
+        .rafal-note {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .note-title {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+
+        .note-text {
+            color: #424242;
+            font-size: 0.9rem;
+        }
+
+        .buy-button {
+            background: linear-gradient(45deg, #ff6b9d, #ff9a9e);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .buy-button:hover {
+            background: linear-gradient(45deg, #ff9a9e, #ff6b9d);
+            transform: translateY(-1px);
+        }
+
+        .coming-soon {
+            background: #f8f9fa;
+            color: #6c757d;
+            padding: 12px 25px;
+            border: 2px dashed #dee2e6;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .shop-info {
+            background: #e8f5e8;
+            border: 2px solid #4ecdc4;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #ff9a9e;
+        }
+
+        .info-title {
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-link {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="about.html" class="nav-link">🐸 About</a>
+                <a href="blog.html" class="nav-link">📖 Journal</a>
+                <a href="tea.html" class="nav-link">🍵 Tea Guide</a>
+                <a href="coffee.html" class="nav-link">☕ Coffee Guide</a>
+                <a href="shop.html" class="nav-link">🛒 Chill Shop</a>
+                <a href="supporters.html" class="nav-link">💚 Supporters</a>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="title">🛒 Chill Shop</h1>
+            <p class="subtitle">Rafał's collection of silly, natural, and actually useful products</p>
+            <div class="intro">
+                <p>Welcome to my little corner of commerce! Here you'll find products I've created that align with the chill lifestyle - 
+                things that make you feel cozy and don't make you feel like you're being sold to by a robot. 
+                Natural, simple, and with a touch of silliness because life's too short for boring products that take themselves too seriously.</p>
+            </div>
+        </div>
+
+        <!-- Featured Products -->
+        <div class="featured-section">
+            <h2 class="section-title">⭐ Featured Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="toothpaste.jpg" alt="Vanilla & Rose Coconut Oil Toothpaste">
+                    </div>
+                    <div class="product-name">
+                        <span class="product-emoji">🦷</span>
+                        Vanilla & Rose Coconut Oil Toothpaste
+                    </div>
+                    <div class="product-description">
+                        Who said toothpaste has to taste like aggressive mint? This luxurious blend combines coconut oil with vanilla and rose for a gentle, floral cleaning experience. 
+                        Tea tree oil does the actual cleaning work while you get to pretend you're brushing your teeth with fancy dessert. It's oral care that feels like self-care.
+                    </div>
+                    <div class="product-features">
+                        <div class="features-title">What makes it special:</div>
+                        <div class="features-list">
+                            • Coconut oil base for natural antibacterial action<br>
+                            • Tea tree oil for deep cleaning without harshness<br>
+                            • Vanilla & rose for a surprisingly delightful taste<br>
+                            • No burning, no chemical aftertaste<br>
+                            • Comes in recyclable glass jar (fancy!)
+                        </div>
+                    </div>
+                    <div class="product-price">$12.99</div>
+                    <div class="rafal-note">
+                        <div class="note-title">Rafał's Take:</div>
+                        <div class="note-text">"I was skeptical about rose-flavored toothpaste, but it's actually amazing! My mouth feels clean and fancy. Plus, no more morning breath that could scare away small animals."</div>
+                    </div>
+                    <button class="buy-button">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="tea-blend.jpg" alt="Chill Evening Rose & Spice Tea Blend">
+                    </div>
+                    <div class="product-name">
+                        <span class="product-emoji">🍵</span>
+                        "Chill Evening" Rose & Spice Blend
+                    </div>
+                    <div class="product-description">
+                        My personal evening tea blend that tastes like a cozy hug with floral notes. Black tea base with rose petals, lavender, and a hint of cinnamon - it's like drinking a warm sunset. 
+                        Perfect for when you want something sophisticated but not too fancy, calming but not boring.
+                    </div>
+                    <div class="product-features">
+                        <div class="features-title">Perfect for:</div>
+                        <div class="features-list">
+                            • Evening wind-down with a gentle caffeine boost<br>
+                            • Reading while avoiding responsibilities<br>
+                            • Contemplating life choices in style<br>
+                            • Impressing guests with your sophisticated taste<br>
+                            • When chamomile feels too sleepy but coffee feels too aggressive
+                        </div>
+                    </div>
+                    <div class="product-price">$18.99</div>
+                    <div class="rafal-note">
+                        <div class="note-title">Rafał's Take:</div>
+                        <div class="note-text">"I drink this every evening while staring out the window. The rose and cinnamon make it feel fancy, but it's not trying too hard. It's like self-care disguised as a regular tea break."</div>
+                    </div>
+                    <button class="coming-soon">Coming Soon!</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Products -->
+        <div class="shop-section">
+            <h2 class="section-title">🌿 Natural & Chill Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="chips.jpg" alt="Stay-at-Home Potato Chips">
+                    </div>
+                    <div class="product-name">
+                        <span class="product-emoji">🥔</span>
+                        Stay-at-Home Potato Chips
+                    </div>
+                    <div class="product-description">
+                       The taste of giving up on your goals and being completely fine with it. Perfectly seasoned chips that remind you of childhood summers when your biggest decision was which video game to play next.
+
+                    </div>
+                    <div class="product-price">$8.99</div>
+                    <button class="coming-soon">Coming Soon!</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="ebook.jpg" alt="HOW TO MAKE 0 FAST">
+                    </div>
+                    <div class="product-name">
+                        <span class="product-emoji">📖</span>
+                        HOW TO MAKE $0 FAST - MUST READ
+                    </div>
+                    <div class="product-description">
+                        THIS IS YOUR CHANCE!! LIMITED EDITION!! DON'T WAIT!! BEST ADVICE TO MAKE $0!! (GUARANTEED!)
+                    </div>
+                    <div class="product-price">$15.99</div>
+                    <button class="coming-soon">Coming Soon!</button>
+                </div>
+                
+                <div class="product-card">
+    <div class="product-image">
+        <img src="smokes.jpg" alt="Minty Herbal Smokes">
+    </div>
+    <div class="product-name">
+        <span class="product-emoji">🌿</span>
+        Minty Herbal Smokes
+    </div>
+    <div class="product-description">
+        For when you want the ritual of smoking without the chaos. This gentle blend of mullein, rose, lavender, and spices with a bit of cannabis creates the perfect moment of pause. 
+       Calming, grounding, and designed for frogs who want to slow down.
+    </div>
+    <div class="product-features">
+        <div class="features-title">What makes it special:</div>
+        <div class="features-list">
+            • Low THC - won't make you anxious<br>
+            • Smooth mullein base that's gentle on your lungs<br>
+            • Lavender and rose for natural relaxation<br>
+            • No tobacco, no nicotine, no harsh chemicals<br>
+            • Perfect for slow mornings or evening wind-down rituals
+        </div>
+    </div>
+    <div class="product-price">$24.99</div>
+    <div class="rafal-note">
+        <div class="note-title">Rafał's Take:</div>
+        <div class="note-text">"Sometimes you just want to relax a bit without going overboard. These are perfect for sitting on the porch, and feeling like you're doing something intentional instead of scrolling your phone."</div>
+    </div>
+    <button class="coming-soon">Coming Soon!</button>
+</div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="candle.jpg" alt="Fresh Linen Spring Morning Candle">
+                    </div>
+                    <div class="product-name">
+                        <span class="product-emoji">🕯️</span>
+                        "Fresh Linen" Spring Morning Candle
+                    </div>
+                    <div class="product-description">
+                        The scent of cozy slow spring mornings when you have nowhere urgent to be. Fresh linen that reminds you of clean sheets and open windows, but without having to actually do laundry. 
+                        Perfect for creating that "I have my life together" vibe even when you're still in yesterday's clothes and haven't left the house.
+                    </div>
+                    <div class="product-price">$22.99</div>
+                    <button class="coming-soon">Coming Soon!</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop Information -->
+        <div class="shop-info">
+            <h2 style="color: #d63384; text-align: center; margin-bottom: 20px;">🛍️ Shop Info & Philosophy</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-title">Natural & Simple</div>
+                    <div>All products are made with natural ingredients and simple processes. No unnecessary chemicals, no complicated ingredient lists you need a chemistry degree to understand.</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-title">Actually Useful</div>
+                    <div>Everything here is something that makes life a little bit cozier and more pleasant. No random products just to fill shelf space. If it's here, it's because it adds a touch of uwu to your day.</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-title">Chill Shipping</div>
+                    <div>Orders ship within 2-3 business days because rushing stresses everyone out. Free shipping over $35 because small orders need love too, but big orders deserve rewards.</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-title">No Pressure Sales</div>
+                    <div>Buy what you want, when you want. No aggressive marketing, no fake urgency, no "limited time" manipulation. The products will be here when you're ready, just like a cozy afternoon that never rushes you.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Thanks for supporting the chill lifestyle! 🛒✨</p>
+            <p style="margin-top: 10px;">Questions about products? Drop me a line: rafal@fundmychill.com</p>
+            <p style="margin-top: 15px;">
+                <a href="supporters.html" class="nav-link">💚 Join the Supporters Community</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Reading Nook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f8f6f0 0%, #ede7d9 100%);
+            min-height: 100vh;
+            color: #2c1810;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reading-space {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            margin-bottom: 2.5rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #8b4513;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #6b5b73;
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .mood-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .mood-label {
+            font-size: 1rem;
+            color: #8b4513;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .mood-btn {
+            background: transparent;
+            border: 2px solid #e8dcc6;
+            color: #8b4513;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mood-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mood-btn:hover::before {
+            left: 100%;
+        }
+
+        .mood-btn:hover {
+            border-color: #8b4513;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
+        }
+
+        .mood-btn.selected {
+            background: #8b4513;
+            color: white;
+            border-color: #8b4513;
+        }
+
+        .book-display {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .book-cover {
+            width: 200px;
+            height: 280px;
+            margin: 0 auto 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #8b4513, #d4a574);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .book-cover:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .book-author {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .book-content {
+            background: #fefcf8;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: left;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            color: #2c1810;
+            min-height: 200px;
+            display: none;
+            border: 1px solid #e8dcc6;
+            position: relative;
+        }
+
+        .book-content.show {
+            display: block;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-controls {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e8dcc6;
+        }
+
+        .page-controls.show {
+            display: flex;
+        }
+
+        .page-btn {
+            background: transparent;
+            border: 2px solid #8b4513;
+            color: #8b4513;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            min-width: 100px;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: #8b4513;
+            color: white;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            font-size: 0.9rem;
+            color: #6b5b73;
+            font-weight: 500;
+        }
+
+        .stats {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            font-size: 0.85rem;
+            color: #8b4513;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-label {
+            margin-right: 1rem;
+            opacity: 0.8;
+        }
+
+        .stat-value {
+            font-weight: 600;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-family: inherit;
+        }
+
+        .back-btn:hover {
+            background: rgba(139, 69, 19, 1);
+            transform: translateY(-2px);
+        }
+
+        .ambient-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .reading-space {
+                padding: 2rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .book-cover {
+                width: 160px;
+                height: 220px;
+                padding: 1rem;
+            }
+
+            .book-title {
+                font-size: 1.1rem;
+            }
+
+            .stats, .back-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                left: auto;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+
+            .mood-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .page-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .page-btn {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-elements">
+        <div class="floating-element">📖</div>
+        <div class="floating-element">✨</div>
+        <div class="floating-element">🕯️</div>
+    </div>
+
+    <a href="index.html" class="back-btn">← Back</a>
+    
+    <div class="stats">
+        <div class="stat-item">
+            <span class="stat-label">Books</span>
+            <span class="stat-value" id="booksRead">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Pages</span>
+            <span class="stat-value" id="pagesRead">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Time</span>
+            <span class="stat-value" id="readingTime">0m</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="reading-space">
+            <div class="header">
+                <h1 class="title">Reading Nook</h1>
+                <p class="subtitle">Find your perfect book moment</p>
+            </div>
+
+            <div class="mood-section">
+                <div class="mood-label">Choose your reading mood</div>
+                <div class="mood-grid">
+                    <button class="mood-btn selected" data-mood="cozy">😌 Cozy</button>
+                    <button class="mood-btn" data-mood="inspiring">✨ Inspiring</button>
+                    <button class="mood-btn" data-mood="peaceful">🌸 Peaceful</button>
+                    <button class="mood-btn" data-mood="thoughtful">🤔 Thoughtful</button>
+                    <button class="mood-btn" data-mood="dreamy">☁️ Dreamy</button>
+                </div>
+            </div>
+
+            <div class="book-display">
+                <div class="book-cover" id="bookCover">
+                    <div class="book-title" id="bookTitle">Click to discover a book</div>
+                    <div class="book-author" id="bookAuthor">📚</div>
+                </div>
+
+                <div class="book-content" id="bookContent">
+                    <div id="pageContent"></div>
+                    <div class="page-controls" id="pageControls">
+                        <button class="page-btn" id="prevBtn">← Previous</button>
+                        <div class="page-info" id="pageInfo">Page 1 of 4</div>
+                        <button class="page-btn" id="nextBtn">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentBook = null;
+        let currentPage = 0;
+        let selectedMood = 'cozy';
+        let stats = {
+            booksRead: 0,
+            pagesRead: 0,
+            readingTime: 0
+        };
+
+        // Reading timer
+        let readingTimer = setInterval(() => {
+            stats.readingTime++;
+            updateStats();
+        }, 60000);
+
+        let lastSelectedBooks = {}; // Track recently selected books per mood
+
+        const books = {
+            cozy: [
+                {
+                    title: "The Art of Slow Living",
+                    author: "A Mindful Guide",
+                    color: "linear-gradient(135deg, #d4a574, #8b4513)",
+                    pages: [
+                        "There's something magical about mornings when you don't set an alarm. The sun gently wakes you, birds are singing outside, and you have nowhere urgent to be. This is the art of slow living - choosing peace over productivity, presence over pressure.",
+                        "Consider the humble tea ceremony. Each step is deliberate: heating the water, measuring the leaves, waiting for the perfect steep. In our rush-everywhere world, this feels almost rebellious. But maybe rebellion is exactly what we need.",
+                        "Your grandmother probably knew something we forgot: that happiness isn't found in the next achievement, but in the simple pleasure of sitting on a porch, watching clouds drift by, feeling grateful for this exact moment.",
+                        "The best conversations happen when nobody's checking their phone. The best meals are eaten slowly. The best books are read without rushing to the end. Slowness isn't laziness - it's wisdom."
+                    ]
+                },
+                {
+                    title: "Cozy Spaces, Quiet Minds",
+                    author: "The Comfort Curator",
+                    color: "linear-gradient(135deg, #a67c52, #d4a574)",
+                    pages: [
+                        "A cozy space isn't about having the most expensive furniture. It's about creating a place where your soul feels at home. Soft blankets, warm lighting, books within reach, and the scent of something comforting brewing in the kitchen.",
+                        "Notice how different spaces make you feel. Harsh fluorescent lights create anxiety. Soft, warm light makes you want to stay and read. Your environment shapes your mood more than you realize. Choose spaces that nurture peace.",
+                        "The Danish concept of 'hygge' isn't just about candles and fuzzy socks. It's about creating intentional moments of coziness and contentment. It's choosing comfort over style, togetherness over productivity, presence over performance.",
+                        "Your perfect cozy evening might be different from everyone else's. Maybe it's tea and a book. Maybe it's cooking while music plays. Maybe it's just sitting quietly, doing absolutely nothing. Honor what brings you peace."
+                    ]
+                },
+                {
+                    title: "Winter Evenings & Warm Hearts",
+                    author: "The Fireside Philosopher",
+                    color: "linear-gradient(135deg, #8b5a3c, #cd853f)",
+                    pages: [
+                        "The first snow of winter transforms everything into quiet magic. Streets become softer, sounds become muffled, and suddenly the whole world feels like it's wrapped in a gentle hush. This is when cozy truly begins.",
+                        "There's an art to building the perfect fire: the careful arrangement of kindling, the patient waiting for flames to catch, the satisfaction of watching wood surrender to warmth. Fire teaches us about transformation and patience.",
+                        "Hot chocolate isn't just a drink; it's a ritual of comfort. The steam rising from the mug, the first warm sip, the way it spreads through your body like a hug from the inside. Some pleasures are simple and perfect.",
+                        "The best stories are told in lamplight, with rain pattering against windows and nowhere else to be. In these moments, time slows down and life feels exactly the right size."
+                    ]
+                },
+                {
+                    title: "Sunday Morning Wisdom",
+                    author: "The Gentle Observer",
+                    color: "linear-gradient(135deg, #deb887, #f5deb3)",
+                    pages: [
+                        "Sunday mornings are for moving slowly. No alarms, no rush, just the natural rhythm of waking when your body is ready. The coffee tastes better when you're not drinking it while running out the door.",
+                        "The newspaper feels different in your hands when you have time to really read it. Articles become stories, not just headlines. You notice the small details, the human moments tucked between the big news.",
+                        "Breakfast can be an event when you're not in a hurry. The eggs cook at their own pace, the bread toasts to golden perfection, and you actually taste what you're eating instead of just consuming fuel.",
+                        "The best part of Sunday isn't that tomorrow is Monday, but that today is exactly what it is: a day for being rather than doing, for existing rather than achieving."
+                    ]
+                }
+            ],
+            inspiring: [
+                {
+                    title: "Small Steps, Big Dreams",
+                    author: "The Gentle Motivator",
+                    color: "linear-gradient(135deg, #b8860b, #daa520)",
+                    pages: [
+                        "Every big change starts with someone who decided they were tired of staying the same. You don't need to transform overnight. You just need to take one small step toward who you want to become. Today.",
+                        "The people living their dream lives didn't have some secret advantage. They just started before they felt ready. They began when they were scared. They took action while they were still figuring it out. Perfection is the enemy of progress.",
+                        "Your dreams don't have expiration dates. It's never too late to learn something new, change careers, move somewhere beautiful, or create something meaningful. The 'right time' is a myth. The right time is when you decide to begin.",
+                        "Stop waiting for permission to live the life you want. Nobody's going to hand you a permission slip for happiness. Nobody's going to tell you it's okay to pursue what makes you come alive. That permission can only come from you."
+                    ]
+                },
+                {
+                    title: "The Courage to Begin",
+                    author: "The Brave Heart",
+                    color: "linear-gradient(135deg, #ff7f50, #ffa500)",
+                    pages: [
+                        "Courage isn't the absence of fear; it's feeling the fear and taking the first step anyway. Every person who has ever done something meaningful has felt the same butterflies in their stomach that you feel right now.",
+                        "The path rarely looks like what you imagined from the starting line. It twists and turns, offers unexpected detours, and sometimes leads to destinations more beautiful than you originally planned. Trust the journey.",
+                        "Your biggest competition isn't other people; it's the voice in your head that says you're not ready, not good enough, not deserving. That voice has been wrong about everything important you've ever done.",
+                        "What if, instead of asking 'What if I fail?' you asked 'What if this is exactly what I need to become who I'm meant to be?' Every challenge is secretly an invitation to grow stronger."
+                    ]
+                },
+                {
+                    title: "Rise & Shine Philosophy",
+                    author: "The Dawn Chaser",
+                    color: "linear-gradient(135deg, #ffd700, #ffeb3b)",
+                    pages: [
+                        "Every sunrise is proof that endings can be beautiful and new beginnings are always possible. Yesterday's mistakes don't have to define today's possibilities. Each dawn is a fresh page.",
+                        "The early morning hours belong to dreamers and doers. While the world sleeps, you can think clearly, plan boldly, and take action without distraction. Morning people don't just see more sunrises; they create more possibilities.",
+                        "Your future self is counting on the decisions you make today. They're hoping you'll be brave enough to start that project, kind enough to forgive that person, wise enough to choose growth over comfort.",
+                        "Champions aren't made in the spotlight; they're made in the quiet moments when no one is watching. In the daily choice to show up, to try again, to believe in tomorrow even when today feels difficult."
+                    ]
+                }
+            ],
+            peaceful: [
+                {
+                    title: "Quiet Moments",
+                    author: "The Mindful Observer",
+                    color: "linear-gradient(135deg, #8fbc8f, #98fb98)",
+                    pages: [
+                        "Peace isn't the absence of chaos. It's finding stillness within yourself while the world spins around you. It's learning that you don't have to react to every emotion, respond to every notification, or fix every problem immediately.",
+                        "Watch how nature moves. Trees bend in the wind but don't break. Water flows around obstacles instead of fighting them. Seasons change gradually, not all at once. There's wisdom in this patience, this gentle persistence.",
+                        "The most profound moments often happen in silence. A sunrise you watch alone. The first sip of morning coffee. The feeling of cool air on your skin during an evening walk. These moments don't need documentation or sharing. They just need to be experienced.",
+                        "Inner peace isn't a destination you arrive at once and stay forever. It's a practice, like tending a garden. Some days the weeds grow back. Some days storms come through. But you keep returning to the quiet space within yourself."
+                    ]
+                },
+                {
+                    title: "The Art of Being Still",
+                    author: "The Meditation Master",
+                    color: "linear-gradient(135deg, #87ceeb, #b0e0e6)",
+                    pages: [
+                        "In stillness, you don't lose yourself; you find yourself. Beneath the constant chatter of thoughts, the endless to-do lists, the worry and planning, there's a deeper you that knows exactly what you need.",
+                        "Breathing is the bridge between body and mind, between the automatic and the intentional. When you pay attention to your breath, you anchor yourself in the present moment. This moment is all that truly exists.",
+                        "Meditation isn't about emptying your mind; it's about changing your relationship with your thoughts. Instead of being swept away by them, you learn to watch them pass like clouds across the sky of your awareness.",
+                        "The deepest rest doesn't come from sleeping more; it comes from learning to be at peace with what is. When you stop fighting reality, you discover that most of your stress was self-created."
+                    ]
+                },
+                {
+                    title: "Garden of Serenity",
+                    author: "The Nature Whisperer",
+                    color: "linear-gradient(135deg, #9acd32, #adff2f)",
+                    pages: [
+                        "Gardens teach us about patience. You plant seeds not knowing exactly what will grow, when it will bloom, or how the weather will cooperate. Yet gardeners trust the process, tend to what they can control, and find peace in uncertainty.",
+                        "Every flower blooms in its own time. The early daffodils don't shame the late roses. The mighty oak doesn't judge the delicate violet. Nature celebrates diversity of timing, and perhaps we should too.",
+                        "Weeds are just plants growing where someone decided they shouldn't be. Sometimes what we call problems are actually life trying to grow in unexpected directions. Before you pull, pause and consider what's trying to emerge.",
+                        "The earth doesn't hurry spring along, and spring doesn't rush to become summer. There's a natural rhythm to growth that honors both action and rest, effort and ease. We are part of this rhythm too."
+                    ]
+                }
+            ],
+            thoughtful: [
+                {
+                    title: "Questions Worth Pondering",
+                    author: "The Curious Soul",
+                    color: "linear-gradient(135deg, #6a5acd, #9370db)",
+                    pages: [
+                        "What if the meaning of life isn't some grand purpose you discover, but the meaning you create through how you choose to spend your days? What if it's found in the way you treat people, the beauty you notice, the love you give?",
+                        "We spend so much time trying to find ourselves, but maybe we're not lost. Maybe we're exactly where we need to be, learning exactly what we need to learn. Maybe the journey itself is the destination.",
+                        "Consider this: You are the result of millions of years of evolution, countless generations surviving long enough to create the next, leading to this moment where you exist, conscious and breathing and capable of love. You are already a miracle.",
+                        "The questions that keep you up at night might not need answers. Maybe they need space to exist, to be pondered, to shape how you see the world. Some mysteries are meant to remain mysterious. Some uncertainty is beautiful."
+                    ]
+                },
+                {
+                    title: "The Philosophy of Maybe",
+                    author: "The Open Mind",
+                    color: "linear-gradient(135deg, #4b0082, #663399)",
+                    pages: [
+                        "What if everything you believe to be true is just one possible way of seeing things? What if your strongest opinions are simply the current best guesses of a mind that's still learning and growing?",
+                        "The wisest people aren't those with the most answers; they're those who ask the best questions. They've learned that curiosity is more valuable than certainty, that wonder is more enriching than knowing.",
+                        "Every person you meet is fighting a battle you know nothing about, carrying stories you'll never hear, dreaming dreams you can't imagine. How does this change the way you move through the world?",
+                        "Time isn't money; time is life itself. How you spend your time is how you spend your life. If that's true, what does the way you spent today say about what you truly value?"
+                    ]
+                },
+                {
+                    title: "Mirror of Consciousness",
+                    author: "The Deep Thinker",
+                    color: "linear-gradient(135deg, #2f4f4f, #708090)",
+                    pages: [
+                        "You are not your thoughts; you are the awareness that observes your thoughts. This shift in perspective changes everything. Suddenly, difficult emotions become weather patterns passing through the sky of your consciousness.",
+                        "The stories you tell yourself about yourself become your reality. If you've been telling yourself limiting stories, remember: you are both the author and the main character. You can revise the narrative at any time.",
+                        "What if your biggest problems are actually your greatest teachers? What if the things you resist most are exactly what you need to grow? What if difficulty isn't punishment but curriculum?",
+                        "In a universe of billions of galaxies, you might feel insignificant. But you're also the universe becoming conscious of itself, atoms that learned to contemplate atoms. You are both infinitely small and impossibly significant."
+                    ]
+                }
+            ],
+            dreamy: [
+                {
+                    title: "Cloud Castles and Day Dreams",
+                    author: "The Dream Weaver",
+                    color: "linear-gradient(135deg, #dda0dd, #e6e6fa)",
+                    pages: [
+                        "In a world that prizes practicality, daydreaming is a radical act. When you stare out the window and imagine different possibilities, you're not wasting time. You're expanding what's possible. You're practicing hope.",
+                        "Your childhood self knew something important: imagination is more valuable than knowledge. They could turn a cardboard box into a spaceship, a blanket into a fort, a stick into a magic wand. That creative spark is still in you, just waiting to be rekindled.",
+                        "Dreams don't have to be realistic to be valuable. The impossible dreams stretch your mind, help you think bigger, make the merely improbable seem achievable. Keep some dreams that are just for dreaming, just for the joy of imagining.",
+                        "Late-night conversations about 'what if' and 'someday' aren't silly. They're blueprints for possibility. They're rehearsals for courage. They're reminders that the world is bigger and more magical than our daily routines suggest."
+                    ]
+                },
+                {
+                    title: "The Magic of Maybe",
+                    author: "The Possibility Keeper",
+                    color: "linear-gradient(135deg, #ffc0cb, #ffe4e1)",
+                    pages: [
+                        "Every sunset is a reminder that endings can be spectacular. Every sunrise proves that beginnings are always possible. Between these two daily miracles, you have countless moments to create something beautiful.",
+                        "Stars are just ancient light, traveling billions of years to reach your eyes tonight. When you look up, you're literally seeing the past while standing in the present, dreaming of the future. You are a time traveler.",
+                        "What if the 'impossible' is just the 'not yet possible'? What if the dreams that seem too big, too wild, too unrealistic are actually tomorrow's reality trying to break through today's limitations?",
+                        "Magic happens in the space between what is and what could be. In that space, seeds become flowers, caterpillars become butterflies, and ordinary people discover they were extraordinary all along."
+                    ]
+                },
+                {
+                    title: "Midnight Musings",
+                    author: "The Starlight Sage",
+                    color: "linear-gradient(135deg, #191970, #4169e1)",
+                    pages: [
+                        "The best ideas come in the quiet hours when the rest of the world is sleeping. In the stillness of midnight, your mind stops performing and starts dreaming. This is when breakthrough thoughts sneak in through the back door.",
+                        "You are made of star dust and ocean waves, of midnight conversations and afternoon laughter, of every book you've read and every sunset you've watched. You are a walking collection of beautiful moments.",
+                        "What if you trusted your wildest dreams as much as you trust your deepest fears? Both are stories about the future, both feel real in your body, but only one opens doors to possibility.",
+                        "The moon doesn't worry about being seen during the day, and the sun doesn't fret about the darkness. They each shine when it's their time, trusting the rhythm of things. Perhaps there's wisdom in this for you too."
+                    ]
+                }
+            ]
+        };
+
+        function setupMoodSelector() {
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedMood = this.dataset.mood;
+                    
+                    if (currentBook) {
+                        closeBook();
+                    }
+                });
+            });
+        }
+
+        function openRandomBook() {
+            const moodBooks = books[selectedMood];
+            
+            // Avoid recently selected books for this mood
+            let availableBooks = moodBooks;
+            if (lastSelectedBooks[selectedMood]) {
+                availableBooks = moodBooks.filter(book => book.title !== lastSelectedBooks[selectedMood]);
+                if (availableBooks.length === 0) {
+                    // If all books were recently selected, reset and use all books
+                    availableBooks = moodBooks;
+                    lastSelectedBooks[selectedMood] = null;
+                }
+            }
+            
+            const randomBook = availableBooks[Math.floor(Math.random() * availableBooks.length)];
+            
+            // Track this selection
+            lastSelectedBooks[selectedMood] = randomBook.title;
+            
+            currentBook = randomBook;
+            currentPage = 0;
+            
+            const bookCover = document.getElementById('bookCover');
+            bookCover.style.background = randomBook.color;
+            document.getElementById('bookTitle').textContent = randomBook.title;
+            document.getElementById('bookAuthor').textContent = `by ${randomBook.author}`;
+            
+            setTimeout(() => {
+                document.getElementById('bookContent').classList.add('show');
+                updatePage();
+                stats.booksRead++;
+                updateStats();
+            }, 300);
+        }
+
+        function updatePage() {
+            document.getElementById('pageContent').textContent = currentBook.pages[currentPage];
+            document.getElementById('pageInfo').textContent = `Page ${currentPage + 1} of ${currentBook.pages.length}`;
+            
+            document.getElementById('prevBtn').disabled = currentPage === 0;
+            document.getElementById('nextBtn').disabled = currentPage === currentBook.pages.length - 1;
+            
+            stats.pagesRead++;
+            updateStats();
+        }
+
+        function nextPage() {
+            if (currentPage < currentBook.pages.length - 1) {
+                currentPage++;
+                updatePage();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePage();
+            }
+        }
+
+        function closeBook() {
+            document.getElementById('bookContent').classList.remove('show');
+            
+            document.getElementById('bookTitle').textContent = 'Click to discover a book';
+            document.getElementById('bookAuthor').textContent = '📚';
+            document.getElementById('bookCover').style.background = 'linear-gradient(135deg, #8b4513, #d4a574)';
+            
+            currentBook = null;
+            currentPage = 0;
+        }
+
+        function updateStats() {
+            document.getElementById('booksRead').textContent = stats.booksRead;
+            document.getElementById('pagesRead').textContent = stats.pagesRead;
+            document.getElementById('readingTime').textContent = stats.readingTime + 'm';
+        }
+
+        // Event listeners
+        document.getElementById('bookCover').addEventListener('click', function() {
+            if (!currentBook) {
+                openRandomBook();
+            } else {
+                closeBook();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', nextPage);
+        document.getElementById('prevBtn').addEventListener('click', previousPage);
+
+        document.addEventListener('keydown', function(e) {
+            if (currentBook) {
+                if (e.key === 'ArrowLeft') {
+                    previousPage();
+                } else if (e.key === 'ArrowRight') {
+                    nextPage();
+                } else if (e.key === 'Escape') {
+                    closeBook();
+                }
+            }
+        });
+
+        // Initialize
+        setupMoodSelector();
+        updateStats();
+    </script>
+</body>
+</html>
