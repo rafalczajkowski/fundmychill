@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Anxiety Cosy Little Book 🐦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #f4e4bc 0%, #e8d5a3 100%);
+            min-height: 100vh;
+            color: #6b4423;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 12px 40px rgba(107, 68, 35, 0.15);
+            margin-bottom: 30px;
+            border: 3px solid #f4e4bc;
+            position: relative;
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #f7a942, #e8d5a3, #d4a574, #f4e4bc);
+            border-radius: 28px;
+            z-index: -1;
+        }
+
+        .book-cover {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title-cloud {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50px;
+            padding: 30px 40px;
+            margin: 20px 0;
+            position: relative;
+            border: 3px solid rgba(247, 169, 66, 0.4);
+            box-shadow: 0 8px 25px rgba(107, 68, 35, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #8b6635;
+            margin-bottom: 20px;
+        }
+
+        .author {
+            font-size: 1rem;
+            color: #a67c52;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .book-emoji {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: gentle-sway 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .description {
+            margin-bottom: 30px;
+        }
+
+        .description h3 {
+            color: #6b4423;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .description p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #8b6635;
+        }
+
+        .sample-box {
+            background: linear-gradient(135deg, #f4e4bc 0%, #f8f2e4 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid #f7a942;
+            font-style: italic;
+            color: #6b4423;
+            box-shadow: 0 4px 15px rgba(247, 169, 66, 0.2);
+            position: relative;
+        }
+
+        .sample-box::before {
+            content: '💭';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #f7a942;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 25px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            transition: transform 0.2s ease;
+            border: 2px solid rgba(247, 169, 66, 0.3);
+            box-shadow: 0 4px 15px rgba(107, 68, 35, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #f7a942, #e8d5a3);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(107, 68, 35, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            color: #6b4423;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #8b6635;
+        }
+
+        .price-section {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(247, 169, 66, 0.15) 0%, rgba(232, 213, 163, 0.15) 100%);
+            padding: 35px 30px;
+            border-radius: 25px;
+            margin: 30px 0;
+            border: 2px dashed #f7a942;
+            position: relative;
+        }
+
+        .price-section::before {
+            content: '✨';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f7a942;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: #f7a942;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .price-note {
+            color: #8b6635;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .buy-btn {
+            background: #f7a942;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .buy-btn:hover {
+            background: #e89611;
+            transform: translateY(-2px);
+        }
+
+        .preview-btn {
+            background: transparent;
+            color: #f7a942;
+            border: 2px solid #f7a942;
+            padding: 13px 28px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .preview-btn:hover {
+            background: #f7a942;
+            color: white;
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 35px 30px;
+            border-radius: 25px;
+            text-align: center;
+            margin-top: 30px;
+            border: 2px solid rgba(180, 140, 80, 0.3);
+            box-shadow: 0 6px 25px rgba(107, 68, 35, 0.1);
+            position: relative;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px dashed rgba(180, 140, 80, 0.4);
+            border-radius: 15px;
+            pointer-events: none;
+        }
+
+        .frog {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .about-text {
+            color: #8b6635;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .casual-note {
+            font-style: italic;
+            color: #a67c52;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .floating-stuff {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floaty {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            animation: drift 8s ease-in-out infinite;
+        }
+
+        .floaty:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floaty:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .floaty:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @media (max-width: 600px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-stuff">
+        <div class="floaty">🐦</div>
+        <div class="floaty">☕</div>
+        <div class="floaty">🌿</div>
+    </div>
+
+    <div class="container">
+        <div class="main-card">
+            <div style="text-align: left; margin-bottom: 30px;">
+                <a href="index.html" style="
+                    color: #6b4423;
+                    text-decoration: none;
+                    font-size: 0.95rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    background: rgba(247, 169, 66, 0.15);
+                    padding: 12px 20px;
+                    border-radius: 25px;
+                    border: 2px solid rgba(247, 169, 66, 0.3);
+                    transition: all 0.2s ease;
+                    font-weight: bold;
+                " onmouseover="this.style.background='rgba(247, 169, 66, 0.25)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(247, 169, 66, 0.15)'; this.style.transform='translateY(0)'">
+                    🐸 ← back to fundmychill
+                </a>
+            </div>
+
+            <div class="book-cover">
+                <div class="title-cloud">
+                    <div class="title" style="font-size: 2.5rem; color: #6b4423; margin-bottom: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
+                        Fundmychill<br>Anti-Anxiety<br>Cosy Little Book
+                    </div>
+                </div>
+                <div class="subtitle">for  when you feel like a crumb on a desert</div>
+                <div class="author">by rafał</div>
+                <div class="book-emoji">🐦☕</div>
+            </div>
+
+            <div class="description">
+                <h3>what's this about?</h3>
+                <p>so you know those days when you feel like a dumb crumb of stale bread? yeah, this book is for those days.</p>
+                
+                <p>it's got cute illustrations, zero pressure to be productive, and some simple checklists that maybe can help you chill out a bit. </p>
+
+                <div class="sample-box">
+                    "your job today is to just exist lol<br>
+                    maybe drink something that isn't tea or coffee<br>
+                    you don't need to bloom like a fricking cactus"
+                </div>
+
+                <p>no hustle culture bs. no toxic positivity. just honest, cozy support for your anxious brain.</p>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🐦</div>
+                    <div class="feature-title">crumb day checklists</div>
+                    <div class="feature-desc">tiny simple tasks for when your life is going nowhere</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">☕</div>
+                    <div class="feature-title">caffeine wisdom</div>
+                    <div class="feature-desc">how too much coffee makes you stressed the duck out</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🤷</div>
+                    <div class="feature-title">existential confusionfuckery</div>
+                    <div class="feature-desc">for when you have no idea what you're doing (same)</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🌿</div>
+                    <div class="feature-title">cozy vibes only</div>
+                    <div class="feature-desc">adorable illustrations that make everything nicer</div>
+                </div>
+            </div>
+
+            <div class="price-section">
+                <div class="price">$5</div>
+                <div class="price-note">that's like one latte at best</div>
+                
+                <div class="buttons">
+                    <a href="#buy" class="buy-btn">get the book</a>
+                    <a href="example.pdf" class="preview-btn" target="_blank">peek inside first</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <div class="frog">🐸</div>
+            <div class="about-text">
+                hi, i'm rafał. i made this book because it feels like i'm going nowhere and i'm a meatsuit with bones on a hellish planet in a vast cold universe and i get too anxious about it sometimes. and if you're like me, i hope this book will help you relax!
+            </div>
+            <div class="casual-note">
+                this is part of my mission to make chill vibes a lifestyle. no pressure tho.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
