@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🐸 Help Me Become a Millionaire (So I Never Have to Work Again) 🐸</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,7 +16,7 @@
         }
 
         body {
-            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #7fcdcd 100%);
             min-height: 100vh;
             line-height: 1.6;
@@ -39,14 +42,14 @@
             font-size: 2.5rem;
             color: #2d5a27;
             margin-bottom: 15px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .subtitle {
             font-size: 1.2rem;
             color: #3d7c47;
             margin-bottom: 20px;
-            font-weight: normal;
+            font-weight: 400;
         }
 
         .frog-avatar {
@@ -82,7 +85,7 @@
             font-size: 2rem;
             color: #2d5a27;
             margin-bottom: 20px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .manifesto-text {
@@ -108,6 +111,7 @@
             color: #2d5a27;
             margin-bottom: 20px;
             text-align: center;
+            font-weight: 700;
         }
 
         .story-text {
@@ -130,6 +134,7 @@
             font-size: 1.6rem;
             color: #2d5a27;
             margin-bottom: 20px;
+            font-weight: 700;
         }
 
         .money-bar {
@@ -152,7 +157,7 @@
         .current-amount {
             font-size: 1.5rem;
             color: #2d5a27;
-            font-weight: bold;
+            font-weight: 700;
             margin: 15px 0;
         }
 
@@ -163,7 +168,7 @@
             border-radius: 10px;
             margin: 15px 0;
             color: #856404;
-            font-weight: bold;
+            font-weight: 600;
             text-align: center;
         }
 
@@ -180,6 +185,7 @@
             font-size: 1.8rem;
             color: #2d5a27;
             margin-bottom: 20px;
+            font-weight: 700;
         }
 
         .donation-explanation {
@@ -203,7 +209,7 @@
             border: none;
             border-radius: 15px;
             font-size: 0.9rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
@@ -213,7 +219,7 @@
             align-items: center;
             justify-content: center;
             min-height: 80px;
-            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
         }
 
         .donate-btn:hover {
@@ -224,7 +230,7 @@
 
         .donate-amount {
             font-size: 1.2rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 5px;
         }
 
@@ -255,6 +261,7 @@
             color: #2d5a27;
             text-align: center;
             margin-bottom: 20px;
+            font-weight: 700;
         }
 
         .update-item {
@@ -268,7 +275,7 @@
         .update-date {
             font-size: 0.9rem;
             color: #666;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .update-text {
@@ -340,7 +347,7 @@
         }
 
         .message-author {
-            font-weight: bold;
+            font-weight: 600;
             color: #2d5a27;
             margin-bottom: 5px;
         }
@@ -380,7 +387,7 @@
             font-size: 1rem;
             width: 250px;
             max-width: 100%;
-            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
         }
 
         .subscribe-btn {
@@ -391,7 +398,8 @@
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+            font-weight: 600;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
         }
 
         .milestone-section {
@@ -416,7 +424,7 @@
             color: white;
             padding: 5px 10px;
             border-radius: 20px;
-            font-weight: bold;
+            font-weight: 600;
             margin-right: 15px;
             min-width: 60px;
             text-align: center;
@@ -434,7 +442,7 @@
             border: none;
             border-radius: 15px;
             font-size: 0.9rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             margin: 5px;
             transition: all 0.3s ease;
@@ -442,7 +450,7 @@
             text-decoration: none;
             text-align: center;
             display: inline-block;
-            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
         }
 
         .garden-btn:hover {
@@ -469,10 +477,10 @@
             padding: 10px 20px;
             border-radius: 10px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             margin-bottom: 15px;
-            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
         }
 
         .games-grid {
@@ -638,11 +646,12 @@
                 <a href="tea.html" class="garden-btn">🍵 Tea Guide</a>
                 <a href="coffee.html" class="garden-btn">☕ Coffee Guide</a>
                 <a href="garden.html" class="garden-btn">🌱 Garden Game</a>
-                <a href="reading-nook.html" class="garden-btn">📚 Reading Nook</a>
+                <a href="legal.html" class="garden-btn">Legal & Privacy</a>
                 <a href="rainy-window.html" class="garden-btn">✏️️ Crosswords</a>
                 <a href="frogger2.html" class="garden-btn">🚗 Frogger</a>
                 <a href="shop.html" class="garden-btn">🛒 Chill Shop</a>
                 <a href="antianxiety.html" class="garden-btn" style="background-color: #ffb3d9 !important;">🛒 ANTI-ANXIETY EBOOK 💙</a>
+                <a href="howtozero.html" class="garden-btn">🛒 HOW TO EARN $0 FAST EBOOK 💸</a>
 
             </div>
             <p style="color: #666; font-size: 0.85rem; margin-top: 10px; font-style: italic;">
@@ -659,8 +668,8 @@
             <p style="color: #3d7c47; font-size: 1.1rem;">
                 Hi! I'm Rafał, a 28-year-old who just realized that working 9-5 for the next 40 years sounds absolutely terrible. 
                 So instead, I'm asking the internet to help me become financially independent so I can spend my days drinking tea, 
-                listening to music, and dilly-dallying like the frog I am at heart. Maybe travelling a bit. <br>
-             <b>Enjoy the minigames, tea & coffee guides, and make sure to visit my chill shop!</b>
+                listening to music, and dilly-dallying. Maybe travelling a bit. <br> </b> <br> </b>
+             <b>You can support me by buying my products (ebooks etc.) or just by donating!<br> Enjoy the minigames, tea & coffee guides, visit my chill shop!</b>
             </p>
         </div>
 
@@ -670,13 +679,10 @@
             <p class="manifesto-text">
                 This is not a startup.  
 It's just me, trying to make chill vibes a full-time lifestyle.  
-There's tea, there are frogs, there's a journal you don't have to write in.  
-Fund it if you want. No pressure. I'm probably making toast. xD
+Fund it if you want. No pressure. xD
             </p>
             <p class="manifesto-text">
                
-You're helping someone choose peace, small joys, and maybe a frog-shaped soap business over panic and productivity.  
-That's kind of beautiful.
             </p>
             <p class="manifesto-text" style="font-weight: bold; color: #2d5a27;">
                 No hustle. Just peace. Fund accordingly. 🫡
@@ -686,13 +692,7 @@ That's kind of beautiful.
         <div class="story-section">
             <h2 class="story-title">My Completely Honest Story</h2>
             <p class="story-text">
-                <strong>Here's the deal:</strong> I graduated college, got a "real job," and immediately thought "there has to be a better way." 
-                I'm not asking for handouts to buy luxury cars or anything crazy - I just want enough money to live mindfully without constantly 
-                worrying about bills. You know, the simple life.
-            </p>
-            <p class="story-text">
-                <strong>Why a frog theme?</strong> I like frogs. They sit on lily pads all day, mind their own business, and seem pretty content. 
-                That's basically my life goal - achieving that level of zen.
+                <strong>Here's the deal:</strong> I graduated university, had a few jobs, I got a postgrad degree, but I have never felt that traditional careers are right for me. The thought of being in this grinder for the next 40 years is really disheartening.
             </p>
             <p class="story-text">
                 <strong>What makes this different:</strong> I'm being 100% transparent. This isn't a sob story or a fake emergency. 
@@ -891,14 +891,13 @@ But did create a fictional product called Chill Evening Tea and convinced myself
         </div>
 
         <div class="footer">
-            <p>Made with genuine intention and questionable life choices by Rafał the Frog 🐸</p>
-            <p style="margin-top: 10px;">This is a real experiment by a real person. All donations go toward the goal of mindful financial independence.</p>
+            <p>Made with genuine intention and questionable life choices by me 🐸</p>
+            <p style="margin-top: 10px;">All donations and purchases go toward the goal of mindful financial independence.</p>
             <p style="margin-top: 15px;">
                 <a href="about.html" class="garden-btn">🐸 Learn About Rafał</a>
-                <a href="blog.html" class="garden-btn">📖 Read the Chill Journal</a>
-                <a href="tea.html" class="garden-btn">🍵 Tea Guide</a>
-                <a href="coffee.html" class="garden-btn">☕ Coffee Guide</a>
-                <a href="garden.html" class="garden-btn">🌱 Play Garden Game</a>
+                <a href="shop.html" class="garden-btn">🛒 Chill Shop</a>
+                <a href="antianxiety.html" class="garden-btn" style="background-color: #ffb3d9 !important;">🛒 ANTI-ANXIETY EBOOK 💙</a>
+                <a href="howtozero.html" class="garden-btn">🛒 HOW TO EARN $0 FAST EBOOK 💸</a>
             </p>
             <p style="margin-top: 10px; font-size: 0.8rem;">
                 Contact: rafal@fundmychill.com | 
