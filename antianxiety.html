@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anti-Anxiety Cosy Little Book 🐦</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,7 +12,7 @@
         }
 
         body {
-            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
             background: linear-gradient(135deg, #f4e4bc 0%, #e8d5a3 100%);
             min-height: 100vh;
             color: #6b4423;
@@ -63,23 +60,6 @@
             position: relative;
             border: 3px solid rgba(247, 169, 66, 0.4);
             box-shadow: 0 8px 25px rgba(107, 68, 35, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-
-        .title-cloud:hover {
-            background: rgba(247, 169, 66, 0.1);
-            border: 3px solid rgba(247, 169, 66, 0.7);
-            box-shadow: 0 12px 35px rgba(107, 68, 35, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .title-cloud:active {
-            background: rgba(247, 169, 66, 0.2);
-            border: 3px solid #f7a942;
-            box-shadow: 0 6px 20px rgba(107, 68, 35, 0.3);
-            transform: translateY(-1px);
         }
 
         .subtitle {
@@ -114,7 +94,6 @@
             color: #6b4423;
             margin-bottom: 15px;
             font-size: 1.3rem;
-            font-weight: 700;
         }
 
         .description p {
@@ -190,7 +169,7 @@
             font-size: 1.1rem;
             color: #6b4423;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: bold;
         }
 
         .feature-desc {
@@ -224,7 +203,7 @@
         .price {
             font-size: 2.5rem;
             color: #f7a942;
-            font-weight: 700;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
@@ -248,11 +227,11 @@
             border: none;
             border-radius: 25px;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: bold;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.2s ease;
-            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
         }
 
         .buy-btn:hover {
@@ -270,7 +249,7 @@
             cursor: pointer;
             text-decoration: none;
             transition: all 0.2s ease;
-            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Comic Sans MS', cursive, sans-serif;
         }
 
         .preview-btn:hover {
@@ -359,36 +338,16 @@
             50% { transform: translateY(-15px); }
         }
 
-        @keyframes sparkle {
-            0% { 
-                background: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 8px 25px rgba(107, 68, 35, 0.1);
-            }
-            25% { 
-                background: rgba(247, 169, 66, 0.15);
-                box-shadow: 0 15px 40px rgba(247, 169, 66, 0.3);
-            }
-            50% { 
-                background: rgba(247, 169, 66, 0.25);
-                box-shadow: 0 20px 50px rgba(247, 169, 66, 0.4);
-            }
-            75% { 
-                background: rgba(247, 169, 66, 0.15);
-                box-shadow: 0 15px 40px rgba(247, 169, 66, 0.3);
-            }
-            100% { 
-                background: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 8px 25px rgba(107, 68, 35, 0.1);
-            }
-        }
-
-        .sparkle-effect {
-            animation: sparkle 1.2s ease-in-out;
-        }
-
         @media (max-width: 600px) {
             .title {
-                font-size: 2rem;
+                font-size: 1.6rem !important;
+                letter-spacing: 1px !important;
+                line-height: 1.2 !important;
+                word-break: break-word;
+            }
+            
+            .title-cloud {
+                padding: 20px 25px !important;
             }
             
             .features {
@@ -402,6 +361,17 @@
 
             .main-card {
                 padding: 25px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .title {
+                font-size: 1.4rem !important;
+                letter-spacing: 0.5px !important;
+            }
+            
+            .title-cloud {
+                padding: 15px 20px !important;
             }
         }
     </style>
@@ -419,25 +389,28 @@
                 <a href="index.html" style="
                     color: #6b4423;
                     text-decoration: none;
-                    font-size: 0.95rem;
+                    font-size: 0.9rem;
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
                     background: rgba(247, 169, 66, 0.15);
-                    padding: 12px 20px;
+                    padding: 10px 16px;
                     border-radius: 25px;
                     border: 2px solid rgba(247, 169, 66, 0.3);
                     transition: all 0.2s ease;
-                    font-weight: 600;
-                    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
+                    font-weight: bold;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 100%;
                 " onmouseover="this.style.background='rgba(247, 169, 66, 0.25)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(247, 169, 66, 0.15)'; this.style.transform='translateY(0)'">
-                    🐸 ← back to fundmychill
+                    🐸 ← back to fmc
                 </a>
             </div>
 
             <div class="book-cover">
-                <div class="title-cloud" onclick="titleClickEffect(this)">
-                    <div class="title" style="font-size: 2.5rem; color: #6b4423; margin-bottom: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
+                <div class="title-cloud">
+                    <div class="title" style="font-size: 2.5rem; color: #6b4423; margin-bottom: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
                         Fundmychill<br>Anti-Anxiety<br>Cosy Little Book
                     </div>
                 </div>
@@ -508,85 +481,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function titleClickEffect(element) {
-            // Remove any existing animation
-            element.classList.remove('sparkle-effect');
-            
-            // Trigger reflow to restart animation
-            void element.offsetWidth;
-            
-            // Add sparkle animation
-            element.classList.add('sparkle-effect');
-            
-            // Show encouraging message
-            const messages = [
-                "🐦 you're gonna be okay!",
-                "☕ take a deep breath",
-                "🌿 you're doing great",
-                "💛 it's ok to feel crummy",
-                "🫂 sending cozy vibes",
-                "🌱 one step at a time",
-                "✨ you're enough as you are"
-            ];
-            
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            
-            // Create floating message
-            const messageDiv = document.createElement('div');
-            messageDiv.textContent = randomMessage;
-            messageDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(247, 169, 66, 0.95);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 25px;
-                font-weight: 600;
-                z-index: 1000;
-                animation: messageFloat 2.5s ease-in-out forwards;
-                pointer-events: none;
-                font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
-                font-size: 1.1rem;
-                box-shadow: 0 8px 25px rgba(107, 68, 35, 0.3);
-                border: 2px solid rgba(255, 255, 255, 0.3);
-            `;
-            
-            document.body.appendChild(messageDiv);
-            setTimeout(() => messageDiv.remove(), 2500);
-            
-            // Remove animation class after it completes
-            setTimeout(() => {
-                element.classList.remove('sparkle-effect');
-            }, 1200);
-        }
-
-        // Add CSS for message float animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes messageFloat {
-                0% { 
-                    opacity: 0; 
-                    transform: translate(-50%, -50%) scale(0.8) translateY(20px); 
-                }
-                20% { 
-                    opacity: 1; 
-                    transform: translate(-50%, -50%) scale(1.05) translateY(0px); 
-                }
-                80% { 
-                    opacity: 1; 
-                    transform: translate(-50%, -50%) scale(1) translateY(-5px); 
-                }
-                100% { 
-                    opacity: 0; 
-                    transform: translate(-50%, -50%) scale(0.9) translateY(-15px); 
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>
