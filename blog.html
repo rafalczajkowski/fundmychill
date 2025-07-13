@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafał's Chill Journal 📖 | Tea Reviews, Updates & Random Thoughts</title>
+    <title>Rafałs's Chill Journal 📖 | Tea Reviews, Updates & Random Thoughts</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,6 +170,25 @@
             justify-content: center;
             font-size: 4rem;
             border: 2px dashed #4ecdc4;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fix for actual images inside post-image containers */
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 13px; /* Slightly less than container to account for border */
+        }
+
+        /* Keep emoji styling for placeholder images */
+        .post-image:not(:has(img)) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
         }
 
         .tea-review {
@@ -361,117 +380,11 @@
             </div>
         </article>
 
-        <article class="post">
-            <div class="post-header">
-                <h2 class="post-title">🌱 Plant Update: Meet My New Succulent Army</h2>
-                <div class="post-meta">
-                    <span class="post-date">January 5, 2025</span>
-                    <span class="post-category">Garden Updates</span>
-                    <div class="mood-indicator">
-                        <span class="mood-emoji">🌿</span>
-                        <span>Plant Parent Level: Enthusiastic Amateur</span>
-                    </div>
-                </div>
-            </div>
-            <div class="post-content">
-                <p>Okay, I may have gone a little overboard at the plant store yesterday. But in my defense, it was a particularly stressful week at the day job, and nothing soothes the soul quite like bringing home some new green friends.</p>
+       
 
-                <div class="plant-update">
-                    <h3>🪴 The New Additions:</h3>
-                    <div class="post-image">🌵</div>
-                    <p><strong>1. Jade Plant ("Chill Bill"):</strong> This chunky boy is going on my desk to remind me to stay calm during Zoom meetings. Jade plants are supposed to bring good luck and prosperity, which feels very on-brand for this whole experiment.</p>
+        
 
-                    <p><strong>2. String of Pearls ("Pearl Jam"):</strong> Because I'm apparently that person who names their plants terrible puns. This cascading beauty is going in a hanging planter by the window. The plant store person said it's "nearly indestructible," which is perfect for someone whose plant care philosophy is "water when I remember + good vibes."</p>
-
-                    <p><strong>3. Baby Snake Plant ("Severus"):</strong> Yes, I went with a Harry Potter reference. Sue me. Snake plants are supposed to purify the air, and since I'm spending way too much time indoors at my current job, I figured we could all use some better air quality.</p>
-                </div>
-
-                <h3>Current Windowsill Situation</h3>
-                <p>My apartment is starting to look like a small greenhouse, and honestly? I'm here for it. There's something so satisfying about caring for living things that don't require small talk or performance reviews.</p>
-
-                <p>Plus, having plants around makes the whole "chill lifestyle" aesthetic more believable. Nothing says "I've got my life figured out" quite like a well-maintained succulent collection (even if you definitely don't have your life figured out).</p>
-
-                <div class="random-thoughts">
-                    <strong>Shower thought:</strong> Plants are basically the perfect roommates. They're quiet, they clean the air, and they never eat your leftovers or leave dishes in the sink.
-                </div>
-
-                <p>Next goal: Save up enough to get a proper outdoor garden space. Imagine having actual soil to dig in instead of just tiny pots on windowsills! A frog can dream... 🐸</p>
-            </div>
-        </article>
-
-        <article class="post">
-            <div class="post-header">
-                <h2 class="post-title">💭 Existential Ramble: On Being a Professional Human</h2>
-                <div class="post-meta">
-                    <span class="post-date">January 1, 2025</span>
-                    <span class="post-category">Deep Thoughts</span>
-                    <div class="mood-indicator">
-                        <span class="mood-emoji">🤔</span>
-                        <span>Philosophical Mood: Activated</span>
-                    </div>
-                </div>
-            </div>
-            <div class="post-content">
-                <p>Happy New Year, internet! Started 2025 with a cup of Earl Grey and some thoughts that felt too big for Twitter but too small for a dissertation, so here we are.</p>
-
-                <h3>The Professional Human Paradox</h3>
-                <p>I've been thinking a lot lately about this whole concept of being a "professional." Like, what does that even mean? That I've successfully trained myself to sit still for 8 hours a day and respond to emails with appropriate levels of enthusiasm about things I don't actually care about?</p>
-
-                <p>Don't get me wrong - I'm not anti-work. I respect people who find genuine fulfillment in their careers. But somewhere along the way, we collectively decided that your job is supposed to be your identity, your passion, AND your primary source of meaning. That's... a lot of pressure for what is essentially an economic exchange.</p>
-
-                <div class="random-thoughts">
-                    <strong>Revolutionary idea:</strong> What if work was just work, and we found meaning in other places? What if "work-life balance" actually meant that work was just one small part of a much richer life?
-                </div>
-
-                <h3>The Frog Philosophy</h3>
-                <p>This is where my frog obsession actually makes sense (stick with me here). Frogs don't have careers. They don't have LinkedIn profiles or five-year plans. They just exist, adapt to their environment, and seem pretty content doing frog things.</p>
-
-                <p>Obviously, I'm not suggesting we all become literal frogs (though the idea has its appeal). But maybe there's something to be learned from creatures that seem to have figured out how to just... be.</p>
-
-                <h3>The Experiment Continues</h3>
-                <p>This crowdfunding experiment isn't really about the money (though the money would be nice). It's about testing whether there's another way to exist in our current economic system. Can you fund a lifestyle of intentional living through the kindness of internet strangers? Can you opt out of traditional career climbing and still be okay?</p>
-
-                <p>So far, the answer seems to be "maybe?" which is honestly more promising than I expected when I started this whole thing.</p>
-
-                <p>Anyway, that's enough existential rambling for one morning. Time to make another cup of tea and tend to my plants like the professional human I definitely am. 🐸☕</p>
-            </div>
-        </article>
-
-        <article class="post">
-            <div class="post-header">
-                <h2 class="post-title">🎮 Cozy Game Review: A Short Hike</h2>
-                <div class="post-meta">
-                    <span class="post-date">December 28, 2024</span>
-                    <span class="post-category">Game Review</span>
-                    <div class="mood-indicator">
-                        <span class="mood-emoji">🏔️</span>
-                        <span>Cozy Factor: Maximum</span>
-                    </div>
-                </div>
-            </div>
-            <div class="post-content">
-                <p>Sometimes you need a game that feels like a warm blanket for your soul. "A Short Hike" is exactly that game.</p>
-
-                <div class="post-image">🏔️</div>
-
-                <h3>What It Is</h3>
-                <p>You play as a little bird who's trying to get cell phone reception at the top of a mountain. That's it. That's the whole premise, and it's perfect.</p>
-
-                <h3>Why It's Perfect</h3>
-                <p>There's no combat, no time pressure, no achievements to unlock. You just wander around a beautiful pixelated mountain, help other cute animals with small tasks, and gradually make your way to the summit. It's the video game equivalent of a gentle nature walk.</p>
-
-                <p>The music is gorgeous, the pixel art is charming, and the whole experience takes about 2 hours. It's like the developers said "what if we made a game that's just... nice?" and then actually did it.</p>
-
-                <div class="random-thoughts">
-                    <strong>Perfect for:</strong> Sunday afternoons, post-work decompression, or any time you need to remember that not everything has to be stressful or competitive.
-                </div>
-
-                <p>This is exactly the kind of game I want to fund more of with this whole experiment. Games that prioritize peace over adrenaline, wonder over winning. The world needs more "A Short Hike" and less "Call of Duty," in my humble frog opinion.</p>
-
-                <div class="rating">Rating: 🐸🐸🐸🐸🐸 (5/5 chill frogs)</div>
-            </div>
-        </article>
-
+       
         <!-- Archive Section -->
         <div class="post" style="text-align: center; background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.9));">
             <h2 style="color: #2d5a27; margin-bottom: 20px; font-weight: 700;">📚 Want to Read More?</h2>
