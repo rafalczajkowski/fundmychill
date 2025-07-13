@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐸 Legal & Privacy - Fund My Chill</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #7fcdcd 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid #4ecdc4;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 2.2rem;
+            color: #2d5a27;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #3d7c47;
+            font-weight: 400;
+        }
+
+        .back-btn {
+            background: #4ecdc4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .back-btn:hover {
+            background: #96ceb4;
+            transform: translateY(-2px);
+        }
+
+        .legal-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #96ceb4;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2d5a27;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 2px solid #4ecdc4;
+            padding-bottom: 10px;
+        }
+
+        .subsection-title {
+            font-size: 1.3rem;
+            color: #2d5a27;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .legal-text {
+            color: #3d7c47;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .highlight-box {
+            background: #fff3cd;
+            border: 2px solid #ffd700;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .contact-box {
+            background: #e8f5e8;
+            border: 2px solid #4ecdc4;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .disclaimer {
+            background: #ffe6e6;
+            border: 2px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            color: #d63384;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            color: #3d7c47;
+            margin-bottom: 8px;
+        }
+
+        .date-updated {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .header {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .legal-section {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .subsection-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">🐸 Back to Main Site</a>
+        
+        <div class="header">
+            <h1 class="title">📜 Legal & Privacy</h1>
+            <p class="subtitle">The boring but necessary stuff (made as chill as possible)</p>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>TL;DR:</strong> This is primarily a small business selling digital products (ebooks, guides) to fund a chill lifestyle experiment. I also accept optional donations. I'm transparent about everything, provide quality products, and respect your privacy. Questions? Just email me! 🐸</p>
+        </div>
+
+        <!-- Terms of Service -->
+        <div class="legal-section">
+            <h2 class="section-title">📋 Terms of Service</h2>
+            <p class="date-updated">Last updated: July 13, 2025</p>
+            
+            <h3 class="subsection-title">What This Site Is</h3>
+            <p class="legal-text">This website ("Fund My Chill") is a personal business by Rafał, primarily selling digital products (ebooks, guides, etc.) to support a lifestyle focused on mindful living and financial independence. The site also accepts voluntary donations as a secondary support option.</p>
+
+            <h3 class="subsection-title">Digital Products & Sales</h3>
+            <p class="legal-text">When you purchase digital products from this site:</p>
+            <ul>
+                <li>You receive a digital download link after payment</li>
+                <li>All sales are final - no refunds unless there's a technical issue preventing download</li>
+                <li>Products are for personal use only (no reselling or redistribution)</li>
+                <li>I retain all copyright and intellectual property rights</li>
+                <li>Technical support is provided for download issues within 30 days</li>
+            </ul>
+
+            <h3 class="subsection-title">Donations (Secondary Option)</h3>
+            <p class="legal-text">Optional donations are:</p>
+            <ul>
+                <li>Voluntary and non-refundable</li>
+                <li>Not tax-deductible (this is not a registered charity)</li>
+                <li>Made without expectation of specific returns or services</li>
+                <li>Used at my discretion for the stated goal of financial independence</li>
+            </ul>
+
+            <div class="disclaimer">
+                <strong>Important:</strong> Focus on purchasing products that provide value to you. Only donate if you want to support the experiment beyond product purchases.
+            </div>
+
+            <h3 class="subsection-title">What You Can Expect</h3>
+            <p class="legal-text">For product purchases, I commit to:</p>
+            <ul>
+                <li>Providing immediate download access after payment</li>
+                <li>Quality digital content as described in product listings</li>
+                <li>Technical support for download issues</li>
+                <li>Honest product descriptions and pricing</li>
+            </ul>
+            <p class="legal-text">For the overall site experience:</p>
+            <ul>
+                <li>Monthly updates on my financial independence journey</li>
+                <li>Transparency about business progress</li>
+                <li>Maintaining this website and its content</li>
+                <li>Responding to reasonable customer service questions</li>
+            </ul>
+
+            <h3 class="subsection-title">What I Don't Promise</h3>
+            <p class="legal-text">Beyond the specific products you purchase, I make no guarantees about:</p>
+            <ul>
+                <li>Specific content creation schedules beyond paid products</li>
+                <li>Investment returns or financial success of my personal journey</li>
+                <li>Continued operation of this website indefinitely</li>
+                <li>Individual responses to all communications</li>
+                <li>Outcomes from following advice in my ebooks (educational content only)</li>
+            </ul>
+
+            <h3 class="subsection-title">Prohibited Uses</h3>
+            <p class="legal-text">You may not use this site to:</p>
+            <ul>
+                <li>Harass, threaten, or spam me or other users</li>
+                <li>Attempt to hack, disrupt, or damage the website</li>
+                <li>Misrepresent your identity or intentions</li>
+                <li>Use automated tools to scrape content</li>
+            </ul>
+
+            <h3 class="subsection-title">Limitation of Liability</h3>
+            <p class="legal-text">This website and its content are provided "as is." I'm not liable for any damages, losses, or disappointments that may result from using this site or making donations. The maximum liability for any claim is limited to the amount you've donated.</p>
+        </div>
+
+        <!-- Privacy Policy -->
+        <div class="legal-section">
+            <h2 class="section-title">🔒 Privacy Policy</h2>
+            <p class="date-updated">Last updated: July 13, 2025</p>
+
+            <h3 class="subsection-title">Information I Collect</h3>
+            <p class="legal-text">I collect minimal information to operate this business:</p>
+            <ul>
+                <li><strong>Purchase information:</strong> Name and email for digital product delivery</li>
+                <li><strong>Email addresses:</strong> If you voluntarily subscribe to updates</li>
+                <li><strong>Payment information:</strong> Processed through PayPal/payment providers (I don't store payment details)</li>
+                <li><strong>Download tracking:</strong> To ensure product delivery and prevent abuse</li>
+                <li><strong>Basic analytics:</strong> Website visits, pages viewed (via Google Analytics or similar)</li>
+                <li><strong>Customer service:</strong> If you contact me directly via email</li>
+            </ul>
+
+            <h3 class="subsection-title">How I Use Your Information</h3>
+            <p class="legal-text">Your information is used only to:</p>
+            <ul>
+                <li>Process and deliver digital product purchases</li>
+                <li>Send purchase confirmations and download links</li>
+                <li>Provide customer support for technical issues</li>
+                <li>Send monthly updates (if subscribed)</li>
+                <li>Respond to your messages</li>
+                <li>Understand website usage patterns</li>
+                <li>Prevent fraud and protect against abuse</li>
+                <li>Comply with legal requirements if necessary</li>
+            </ul>
+
+            <h3 class="subsection-title">Information Sharing</h3>
+            <p class="legal-text">I don't sell, rent, or share your personal information with third parties, except:</p>
+            <ul>
+                <li>Payment processors (PayPal, Stripe) for purchase processing</li>
+                <li>Email service providers for sending product deliveries and updates</li>
+                <li>Digital delivery platforms for secure file hosting</li>
+                <li>If required by law or to protect legal rights</li>
+            </ul>
+
+            <h3 class="subsection-title">Data Security</h3>
+            <p class="legal-text">I take reasonable measures to protect your information, including:</p>
+            <ul>
+                <li>Using secure, encrypted connections (HTTPS)</li>
+                <li>Working with reputable third-party services</li>
+                <li>Limiting access to personal information</li>
+            </ul>
+
+            <div class="disclaimer">
+                <strong>Note:</strong> No method of transmission over the internet is 100% secure. While I strive to protect your information, I cannot guarantee absolute security.
+            </div>
+
+            <h3 class="subsection-title">Your Rights</h3>
+            <p class="legal-text">You have the right to:</p>
+            <ul>
+                <li>Unsubscribe from email updates at any time</li>
+                <li>Request a copy of information I have about you</li>
+                <li>Request deletion of your personal information</li>
+                <li>Correct any inaccurate information</li>
+            </ul>
+
+            <h3 class="subsection-title">Cookies and Tracking</h3>
+            <p class="legal-text">This site may use cookies and similar technologies for:</p>
+            <ul>
+                <li>Basic website functionality</li>
+                <li>Analytics to understand site usage</li>
+                <li>Remembering your preferences</li>
+            </ul>
+            <p class="legal-text">You can disable cookies in your browser settings, though some site features may not work properly.</p>
+        </div>
+
+        <!-- Disclaimers -->
+        <div class="legal-section">
+            <h2 class="section-title">⚠️ Important Disclaimers</h2>
+
+            <h3 class="subsection-title">Business Disclaimer</h3>
+            <p class="legal-text">This website operates as a small digital business selling educational and entertainment content. Any information about investments, savings, or financial strategies in my products is for educational purposes only and reflects my personal experience and opinions. Always consult with qualified professionals before making important decisions.</p>
+
+            <h3 class="subsection-title">Product Disclaimer</h3>
+            <p class="legal-text">Digital products sold on this site are for educational and entertainment purposes. While I strive to provide valuable content:</p>
+            <ul>
+                <li>Results may vary based on individual circumstances</li>
+                <li>Content reflects personal opinions and experiences</li>
+                <li>No specific outcomes or results are guaranteed</li>
+                <li>Professional advice should be sought for serious matters</li>
+            </ul>
+
+            <h3 class="subsection-title">No Guarantees</h3>
+            <p class="legal-text">While I'm committed to quality products and transparency, I cannot guarantee:</p>
+            <ul>
+                <li>That my personal financial independence journey will be successful</li>
+                <li>Specific outcomes from following content in my products</li>
+                <li>Continuous operation of this website indefinitely</li>
+                <li>That my lifestyle experiment will achieve its goals</li>
+            </ul>
+
+            <h3 class="subsection-title">Tax Considerations</h3>
+            <p class="legal-text">Product purchases are standard business transactions. Donations to this website are not tax-deductible (this is not a registered nonprofit or charity). Consult a tax professional if you have questions about tax implications.</p>
+
+            <h3 class="subsection-title">Content Accuracy</h3>
+            <p class="legal-text">While I strive for accuracy, information on this site may contain errors or become outdated. I'm not responsible for decisions made based on information found here.</p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-box">
+            <h3 style="color: #2d5a27; margin-bottom: 15px;">📧 Questions or Concerns?</h3>
+            <p style="color: #3d7c47; margin-bottom: 10px;">
+                If you have any questions about these terms or privacy practices, feel free to reach out:
+            </p>
+            <p style="color: #2d5a27; font-weight: 600;">
+                Email: rafal@fundmychill.com
+            </p>
+            <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                I'll respond to reasonable inquiries within a few days (or whenever I finish my current cup of tea ☕)
+            </p>
+        </div>
+
+        <!-- Updates Notice -->
+        <div class="legal-section">
+            <h2 class="section-title">🔄 Updates to This Policy</h2>
+            <p class="legal-text">I may update these terms and privacy policy occasionally. When I do:</p>
+            <ul>
+                <li>I'll update the "Last updated" date at the top of each section</li>
+                <li>Significant changes will be mentioned in the monthly update emails</li>
+                <li>Continued use of the site after changes means you accept the updated terms</li>
+            </ul>
+            <p class="legal-text">I'll try to keep changes minimal and always in the spirit of maintaining a chill, transparent operation.</p>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="index.html" class="back-btn">🐸 Back to the Chill Zone</a>
+        </div>
+    </div>
+</body>
+</html>
